@@ -1,0 +1,73 @@
+Treatment,Dpi,Rep,Cq
+P. fluorescens,IL-1,1,20.9
+P. fluorescens,IL-1,2,21.12
+P. fluorescens,IL-1,3,21.29
+B. amyloliquifaciens,IL-1,1,20.59
+B. amyloliquifaciens,IL-1,2,20.63
+B. amyloliquifaciens,IL-1,3,20.6
+B. subtilis,IL-1,1,20.09
+B. subtilis,IL-1,2,20.1
+B. subtilis,IL-1,3,20.1
+P. fluorescens,IL-4,1,20.33
+P. fluorescens,IL-4,2,20.4
+P. fluorescens,IL-4,3,20.45
+B. amyloliquifaciens,IL-4,1,20.63
+B. amyloliquifaciens,IL-4,2,20.78
+B. amyloliquifaciens,IL-4,3,20.78
+B. subtilis,IL-4,1,20.52
+B. subtilis,IL-4,2,20.45
+B. subtilis,IL-4,3,20.55
+P. fluorescens,IL-7,1,22.08
+P. fluorescens,IL-7,2,22.18
+P. fluorescens,IL-7,3,22.1
+B. amyloliquifaciens,IL-7,1,20.8
+B. amyloliquifaciens,IL-7,2,21.03
+B. amyloliquifaciens,IL-7,3,20.8
+B. subtilis,IL-7,1,20.67
+B. subtilis,IL-7,2,20.75
+B. subtilis,IL-7,3,20.96
+P. fluorescens,IL-10,1,22
+P. fluorescens,IL-10,2,21.97
+P. fluorescens,IL-10,3,21.97
+B. amyloliquifaciens,IL-10,1,21.93
+B. amyloliquifaciens,IL-10,2,21.6
+B. amyloliquifaciens,IL-10,3,21.79
+B. subtilis,IL-10,1,22.05
+B. subtilis,IL-10,2,22.21
+B. subtilis,IL-10,3,22.28
+P. fluorescens,SL-7,1,16.52
+P. fluorescens,SL-7,2,16.28
+P. fluorescens,SL-7,3,16.3
+B. amyloliquifaciens,SL-7,1,29.74
+B. amyloliquifaciens,SL-7,2,30.04
+B. amyloliquifaciens,SL-7,3,29.9
+B. subtilis,SL-7,1,26.99
+B. subtilis,SL-7,2,26.87
+B. subtilis,SL-7,3,26.97
+P. fluorescens,SL-10,1,31.91
+P. fluorescens,SL-10,2,32.03
+P. fluorescens,SL-10,3,32.23
+B. amyloliquifaciens,SL-10,1,30.48
+B. amyloliquifaciens,SL-10,2,30.54
+B. amyloliquifaciens,SL-10,3,30.9
+B. subtilis,SL-10,1,30.18
+B. subtilis,SL-10,2,30.32
+B. subtilis,SL-10,3,30.28
+Control,IL-1,1,20.69
+Control,IL-1,2,20.96
+Control,IL-1,3,20.91
+Control,IL-4,1,22.6
+Control,IL-4,2,22.36
+Control,IL-4,3,22.52
+Control,IL-7,1,21.37
+Control,IL-7,2,21.29
+Control,IL-7,3,21.1
+Control,IL-10,1,21.36
+Control,IL-10,2,21.23
+Control,IL-10,3,21.14
+Control,SL-7,1,30.73
+Control,SL-7,2,30.78
+Control,SL-7,3,30.53
+Control,SL-10,1,24.79
+Control,SL-10,2,24.71
+Control,SL-10,3,24.57

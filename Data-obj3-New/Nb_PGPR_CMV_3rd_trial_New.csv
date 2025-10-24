@@ -1,0 +1,106 @@
+Treatment,Rep,Dpi,Cq
+P. fluorescens,1,IL-1,24.46
+P. fluorescens,2,IL-1,24.53
+P. fluorescens,3,IL-1,24.47
+S. marcescens,1,IL-1,25.21
+S. marcescens,2,IL-1,25.29
+S. marcescens,3,IL-1,24.41
+B. amyloliquifaciens,1,IL-1,19.87
+B. amyloliquifaciens,2,IL-1,19.94
+B. amyloliquifaciens,3,IL-1,19.86
+B. subtilis,1,IL-1,23.27
+B. subtilis,2,IL-1,23.3
+B. subtilis,3,IL-1,23.29
+P. fluorescens,1,IL-4,22.28
+P. fluorescens,2,IL-4,22.31
+P. fluorescens,3,IL-4,22.24
+S. marcescens,1,IL-4,25.3
+S. marcescens,2,IL-4,25.45
+S. marcescens,3,IL-4,31.08
+B. amyloliquifaciens,1,IL-4,26.17
+B. amyloliquifaciens,2,IL-4,26.19
+B. amyloliquifaciens,3,IL-4,26.26
+B. subtilis,1,IL-4,15.17
+B. subtilis,2,IL-4,15.22
+B. subtilis,3,IL-4,15.11
+P. fluorescens,1,IL-7,11.72
+P. fluorescens,2,IL-7,11.44
+P. fluorescens,3,IL-7,11.61
+S. marcescens,1,IL-7,24.7
+S. marcescens,2,IL-7,24.64
+S. marcescens,3,IL-7,25.04
+B. amyloliquifaciens,1,IL-7,17.91
+B. amyloliquifaciens,2,IL-7,18.01
+B. amyloliquifaciens,3,IL-7,17.91
+B. subtilis,1,IL-7,12.37
+B. subtilis,2,IL-7,12.7
+B. subtilis,3,IL-7,12.34
+P. fluorescens,1,IL-10,11.67
+P. fluorescens,2,IL-10,11.77
+P. fluorescens,3,IL-10,11.36
+S. marcescens,1,IL-10,11.4
+S. marcescens,2,IL-10,11.54
+S. marcescens,3,IL-10,11.78
+B. amyloliquifaciens,1,IL-10,11.41
+B. amyloliquifaciens,2,IL-10,11.5
+B. amyloliquifaciens,3,IL-10,11.22
+B. subtilis,1,IL-10,10.67
+B. subtilis,2,IL-10,10.91
+B. subtilis,3,IL-10,10.88
+P. fluorescens,1,SL-7,19.6
+P. fluorescens,2,SL-7,19.47
+P. fluorescens,3,SL-7,19.35
+S. marcescens,1,SL-7,12.39
+S. marcescens,2,SL-7,12.41
+S. marcescens,3,SL-7,12.44
+B. amyloliquifaciens,1,SL-7,12.2
+B. amyloliquifaciens,2,SL-7,12.44
+B. amyloliquifaciens,3,SL-7,12.14
+B. subtilis,1,SL-7,14.33
+B. subtilis,2,SL-7,14.13
+B. subtilis,3,SL-7,14.17
+P. fluorescens,1,SL-10,11.64
+P. fluorescens,2,SL-10,11.71
+P. fluorescens,3,SL-10,11.72
+S. marcescens,1,SL-10,10.94
+S. marcescens,2,SL-10,11.02
+S. marcescens,3,SL-10,11.12
+B. amyloliquifaciens,1,SL-10,10.91
+B. amyloliquifaciens,2,SL-10,11.08
+B. amyloliquifaciens,3,SL-10,11.08
+B. subtilis,1,SL-10,11.97
+B. subtilis,2,SL-10,12.07
+B. subtilis,3,SL-10,12.04
+Control,1,IL-1,21.36
+Control,2,IL-1,21.22
+Control,3,IL-1,21.31
+Control,1,IL-4,23.42
+Control,2,IL-4,23.53
+Control,3,IL-4,23.67
+Control,1,IL-7,12.12
+Control,2,IL-7,12.27
+Control,3,IL-7,12.26
+Control,1,IL-10,11.57
+Control,2,IL-10,11.92
+Control,3,IL-10,11.39
+Control,1,SL-7,23.37
+Control,2,SL-7,23.43
+Control,3,SL-7,23.61
+Control,1,SL-10,11.55
+Control,2,SL-10,11.53
+Control,3,SL-10,11.47
+P. fluorescens,1,SL-14,12.9
+P. fluorescens,2,SL-14,12.71
+P. fluorescens,3,SL-14,12.9
+S. marcescens,1,SL-14,12.43
+S. marcescens,2,SL-14,12.16
+S. marcescens,3,SL-14,12.36
+B. amyloliquifaciens,1,SL-14,12.22
+B. amyloliquifaciens,2,SL-14,12.21
+B. amyloliquifaciens,3,SL-14,12.18
+B. subtilis,1,SL-14,11.92
+B. subtilis,2,SL-14,11.69
+B. subtilis,3,SL-14,11.39
+Control,1,SL-14,11.6
+Control,2,SL-14,11.31
+Control,3,SL-14,11.15
