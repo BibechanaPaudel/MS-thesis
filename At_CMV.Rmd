@@ -76,25 +76,26 @@ CMV1 <- rep1 %>%  # Start with the dataset `rep1` and pipe (%>%) it into the nex
 
 ```{r CMV 1st trial_ At }
 CMV_1 <- ggplot(CMV1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
-  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.5), width = 0.5, fill="#56B4E9") +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
    geom_errorbar(aes(ymin = avg.virus - se, 
                     ymax = avg.virus + se),
-                width = 0.4,
-                position = position_dodge(width = 0.5)) +
+                width = 0.3,
+                position = position_dodge(width = 0.3)) +
   labs(x = "Time Point (Dpi)", y = "Log Copy Number") +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5),
-        strip.text = element_text(face = "bold", size = 20, color = "black"),
+        strip.text = element_text(face = "bold", size = 12, color = "black"),
         legend.position = "none", 
-        axis.text.x = element_text(color = "black", face="bold", size=20),   # X-axis text color
-        axis.text.y = element_text(color = "black", face="bold", size=20),   # Y-axis text color
-        axis.title.x = element_text(color = "black", face="bold", size=20),  # X-axis label color
-        axis.title.y = element_text(color = "black", face="bold", size=20),  # Y-axis label color
+        axis.text.x = element_text(color = "black", face="bold", size=12),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=12),   # Y-axis text color
+        axis.title.x = element_text(color = "black", face="bold", size=15),  # X-axis label color
+        axis.title.y = element_text(color = "black", face="bold", size=15),  # Y-axis label color
         axis.line = element_line(color = "black", size=0.75)      # Axis lines color
   ) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+    expand = expansion(mult = c(0, 0.02)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
   )+
+   scale_x_discrete(drop = TRUE) +
   facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
 
 CMV_1
@@ -150,30 +151,58 @@ CMV2 <- rep2 %>%  # Start with the dataset `rep2` and pipe (%>%) it into the nex
 
 ```{r CMV 2nd trial_At }
 CMV_2 <- ggplot(CMV2,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
-  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.5), width = 0.5, fill="#56B4E9") +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
    geom_errorbar(aes(ymin = avg.virus - se, 
                     ymax = avg.virus + se),
-                width = 0.4,
-                position = position_dodge(width = 0.5)) +
+                width = 0.3,
+                position = position_dodge(width = 0.3)) +
   labs(x = "Time Point (Dpi)", y = "Log Copy Number") +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5),
-        strip.text = element_text(face = "bold", size = 20, color = "black"),
+        strip.text = element_text(face = "bold", size = 12, color = "black"),
         legend.position = "none", 
-        axis.text.x = element_text(color = "black", face="bold", size=20),   # X-axis text color
-        axis.text.y = element_text(color = "black", face="bold", size=20),   # Y-axis text color
-        axis.title.x = element_text(color = "black", face="bold", size=20),  # X-axis label color
-        axis.title.y = element_text(color = "black", face="bold", size=20),  # Y-axis label color
+        axis.text.x = element_text(color = "black", face="bold", size=12),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=12),   # Y-axis text color
+        axis.title.x = element_text(color = "black", face="bold", size=15),  # X-axis label color
+        axis.title.y = element_text(color = "black", face="bold", size=15),  # Y-axis label color
         axis.line = element_line(color = "black", size=0.75)      # Axis lines color
   ) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+    expand = expansion(mult = c(0, 0.02)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
   )+
+   scale_x_discrete(drop = TRUE) +
   facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
 
 CMV_2
 
 ```
+
+
+```{r}
+CMV_1 <- CMV_1 +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+
+CMV_2 <- CMV_2 +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+combined_plot_RNA3 <- ggarrange(
+  CMV_1,
+  CMV_2,
+  ncol = 1,
+  labels = c("A", "B"),
+  align = "v"      # vertically align plots
+)
+
+# Add shared axis titles
+combined_plot_RNA3_annotated <- annotate_figure(
+  combined_plot_RNA3,
+  bottom = text_grob("Time Point (Dpi)", size = 15, face="bold"),
+  left = text_grob("Log Copy Number", rot = 90, size = 15, face="bold")
+)
+combined_plot_RNA3_annotated
+```
+
 
 
 ###Load and verify data of Rep 1
@@ -222,26 +251,27 @@ CMV1 <- rep1_CP_1ng %>%  # Start with the dataset `rep1` and pipe (%>%) it into 
 
 
 ```{r CMV 1st trial_At_CP_1ng }
-CMV_1_CP_1ng <- ggplot(CMV1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10", "SL-14")), y = avg.virus)) +
-  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.5), width = 0.5, fill="#56B4E9") +
+CMV_1_CP_1ng <- ggplot(CMV1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
    geom_errorbar(aes(ymin = avg.virus - se, 
                     ymax = avg.virus + se),
-                width = 0.4,
-                position = position_dodge(width = 0.5)) +
+                width = 0.3,
+                position = position_dodge(width = 0.3)) +
   labs(x = "Time Point (Dpi)", y = "Log Copy Number") +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5),
-        strip.text = element_text(face = "bold", size = 20, color = "black"),
+        strip.text = element_text(face = "bold", size = 12, color = "black"),
         legend.position = "none", 
-        axis.text.x = element_text(color = "black", face="bold", size=20),   # X-axis text color
-        axis.text.y = element_text(color = "black", face="bold", size=20),   # Y-axis text color
-        axis.title.x = element_text(color = "black", face="bold", size=20),  # X-axis label color
-        axis.title.y = element_text(color = "black", face="bold", size=20),  # Y-axis label color
+        axis.text.x = element_text(color = "black", face="bold", size=12),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=12),   # Y-axis text color
+        axis.title.x = element_text(color = "black", face="bold", size=15),  # X-axis label color
+        axis.title.y = element_text(color = "black", face="bold", size=15),  # Y-axis label color
         axis.line = element_line(color = "black", size=0.75)      # Axis lines color
   ) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+    expand = expansion(mult = c(0, 0.02)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
   )+
+   scale_x_discrete(drop = TRUE) +
   facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
 
 
@@ -297,29 +327,56 @@ CMV2 <- rep2_CP_1ng %>%  # Start with the dataset `rep2_CP_1ng` and pipe (%>%) i
 
 
 ```{r CMV 2nd trial_At_CP_1ng}
-CMV_2_CP_1ng <- ggplot(CMV2,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10", "SL-14")), y = avg.virus)) +
-  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.5), width = 0.5, fill="#56B4E9") +
+CMV_2_CP_1ng <- ggplot(CMV2,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
    geom_errorbar(aes(ymin = avg.virus - se, 
                     ymax = avg.virus + se),
-                width = 0.4,
-                position = position_dodge(width = 0.5)) +
+                width = 0.3,
+                position = position_dodge(width = 0.3)) +
   labs(x = "Time Point (Dpi)", y = "Log Copy Number") +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5),
-        strip.text = element_text(face = "bold", size = 20, color = "black"),
+        strip.text = element_text(face = "bold", size = 12, color = "black"),
         legend.position = "none", 
-        axis.text.x = element_text(color = "black", face="bold", size=20),   # X-axis text color
-        axis.text.y = element_text(color = "black", face="bold", size=20),   # Y-axis text color
-        axis.title.x = element_text(color = "black", face="bold", size=20),  # X-axis label color
-        axis.title.y = element_text(color = "black", face="bold", size=20),  # Y-axis label color
+        axis.text.x = element_text(color = "black", face="bold", size=12),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=12),   # Y-axis text color
+        axis.title.x = element_text(color = "black", face="bold", size=15),  # X-axis label color
+        axis.title.y = element_text(color = "black", face="bold", size=15),  # Y-axis label color
         axis.line = element_line(color = "black", size=0.75)      # Axis lines color
   ) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+    expand = expansion(mult = c(0, 0.02)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
   )+
+   scale_x_discrete(drop = TRUE) +
   facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
 
 
 CMV_2_CP_1ng
 
+```
+
+
+```{r}
+CMV_1_CP_1ng <- CMV_1 +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+
+CMV_2_CP_1ng<- CMV_2 +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+combined_plot_CP <- ggarrange(
+  CMV_1_CP_1ng,
+  CMV_2_CP_1ng,
+  ncol = 1,
+  labels = c("A", "B"),
+  align = "v"      # vertically align plots
+)
+
+# Add shared axis titles
+combined_plot_CP_annotated <- annotate_figure(
+  combined_plot_RNA3,
+  bottom = text_grob("Time Point (Dpi)", size = 15, face="bold"),
+  left = text_grob("Log Copy Number", rot = 90, size = 15, face="bold")
+)
+combined_plot_CP_annotated
 ```
