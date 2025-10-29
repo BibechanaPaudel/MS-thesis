@@ -1,5 +1,5 @@
 ---
-title: "NB_PGPR_PVY"
+title: "At_PGPR_PVY"
 author: "Bibechana Paudel"
 date: "2025-10-29"
 output: html_document
@@ -29,7 +29,7 @@ library(multcompView)
 
 ###Load and verify data of Rep 1
 ```{r}
-rep <- read.csv("Data-obj3-New/Nb_PGPR_PVY_New.csv", header=T)
+rep <- read.csv("Data-obj3-New/At_PGPR_PVY_New.csv", header=T)
 head(rep)  # View the first few rows
 str(rep)   # Check the structure of the data
 summary(rep) # Quick statistical summary
@@ -93,7 +93,7 @@ PVY1 <- rep %>%  # Start with the dataset `rep` and pipe (%>%) it into the next 
     avg.virus= mean(logViralLoad, na.rm=TRUE),
     n=n(),
     se = sd(logViralLoad)/sqrt(n)) %>% 
-   left_join(lsd_results,by=c("Dpi", "Treatment"))# join the significant letters with the PVY1 data frame.
+  left_join(lsd_results,by=c("Dpi", "Treatment"))# join the significant letters with the PVY1 data frame.
 ```
 
 ##Classify the sample collection days based on leaf
@@ -113,7 +113,7 @@ inoculated$Treatment<-factor(inoculated$Treatment, levels=c("Control","P. fluore
 ```
 
 
-```{r PVY on IL_1st trial_Nb }
+```{r PVY on IL_1st trial_At }
 offset <- 0.05 * diff(range(inoculated$avg.virus + inoculated$se, na.rm = TRUE))
 cbbPalette <- c( "#56B4E9","#F0E442","#CC79A7", "#E69F00")  ##Load colour blind friendly cbbPalette
 PVY_IL<-ggplot(inoculated, aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10")), y =avg.virus , fill = Treatment)) +
@@ -128,8 +128,7 @@ PVY_IL<-ggplot(inoculated, aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "I
        x = "",
        y = "Log Copy Number") +  # labels of x and y axis
   scale_fill_manual(values=cbbPalette,
-                    labels=c(expression(bold("Control")),expression(bolditalic("P. fluorescens")), 
-                             expression(bolditalic("S. marcescens")),expression(bolditalic("B. subtilis"))))+
+                    labels=c(expression(bold("Control")),expression(bolditalic("P. fluorescens")),expression(bolditalic("S. marcescens")),expression(bolditalic("B. subtilis"))))+
   scale_y_continuous(
     expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
   )+
@@ -137,14 +136,14 @@ PVY_IL<-ggplot(inoculated, aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "I
         legend.key.size = unit(0.5, "cm"),  # Adjusts the size of the legend keys
         legend.title = element_blank(),  # Adjusts the legend title font size
         legend.text = element_text(size = 11),
-               axis.text.x = element_text(color = "black", face="bold",size=11),   # X-axis text color
-        axis.text.y = element_text(color = "black", face="bold",size=11),   # Y-axis text color
+               axis.text.x = element_text(color = "black", face="bold", size=11),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=11),   # Y-axis text color
         axis.title.x = element_text(color = "black"),  # X-axis label color
         axis.title.y = element_text(color = "black", face="bold", size=11),  # Y-axis label color
         axis.line = element_line(color = "black")      # Axis lines color
   )
 
- PVY_IL 
+ PVY_IL
 ```
 
 ## Visualization: Systemic sample
@@ -155,7 +154,7 @@ systemic$Treatment<-factor(systemic$Treatment, levels=c("Control","P. fluorescen
 ```
 
 
-```{r,PVY on SL_1st trial_Nb }
+```{r,PVY on SL_1st trial_At }
 offset <- 0.05 * diff(range(systemic$avg.virus + systemic$se, na.rm = TRUE))
 cbbPalette <- c( "#56B4E9","#F0E442","#CC79A7", "#E69F00")
 PVY_SL<-ggplot(systemic, aes(x =factor(Dpi,levels=c("SL-7","SL-10","SL-14")), y =avg.virus , fill = Treatment)) +
@@ -164,7 +163,7 @@ PVY_SL<-ggplot(systemic, aes(x =factor(Dpi,levels=c("SL-7","SL-10","SL-14")), y 
                     ymax = avg.virus + se),
                 width = 0.4,
                 position = position_dodge(width = 0.7)) +
-  geom_text(aes(y = avg.virus + se + offset, label = groups),position = position_dodge(width = 0.7), vjust = -0.5, size=4.5)+   ## Add group comparison letters
+geom_text(aes(y = avg.virus + se + offset, label = groups),position = position_dodge(width = 0.7), vjust = -0.5, size=4.5)+   ## Add group comparison letters
   theme_classic() +
   labs(title= "" ,
        x = "",
@@ -178,14 +177,14 @@ PVY_SL<-ggplot(systemic, aes(x =factor(Dpi,levels=c("SL-7","SL-10","SL-14")), y 
         legend.key.size = unit(0.5, "cm"),  # Adjusts the size of the legend keys
         legend.title = element_blank(),  # Adjusts the legend title font size
         legend.text = element_text(size = 11),
-                axis.text.x = element_text(color = "black", face="bold",size=11),   # X-axis text color
-        axis.text.y = element_text(color = "black", face="bold",size=11),   # Y-axis text color
+                axis.text.x = element_text(color = "black", face="bold", size=11),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=11),   # Y-axis text color
         axis.title.x = element_text(color = "black"),  # X-axis label color
         axis.title.y = element_text(color = "black", face="bold", size=11),  # Y-axis label color
         axis.line = element_line(color = "black")      # Axis lines color
   )
 
- PVY_SL 
+ PVY_SL
 ```
 
 ## Combined figure
@@ -196,7 +195,7 @@ PVY<-ggarrange(PVY_IL, PVY_SL,    #combine the  figures
                    ncol=2,
                    common.legend=T,    # Gives the common legend for both figures
                    widths=c(1.25,1))   # Makes the width of 1st fig 1.75 times more than 2nd fig
-PVY
+PVY.1st
 ```
 
 
