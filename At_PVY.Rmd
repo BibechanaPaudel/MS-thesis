@@ -1,0 +1,176 @@
+---
+title: "At_PVY"
+author: "Bibechana Paudel"
+date: "2025-10-29"
+output: html_document
+---
+
+# **First trial**
+
+###Libraries used
+
+```{r}
+#install.packages("tidyverse")
+#install.packages("ggplot2")
+#install.packages("agricolae")
+#install.packages("tidyr")
+#install.packages("ggpubr")
+#install.packages("multcomp")
+#install.packages("emmeans")
+#install.packages("multcompView")
+library(tidyverse)
+library(ggplot2)
+library(agricolae)
+library(tidyr)
+library(ggpubr)
+library(multcomp)
+library(emmeans)
+library(multcompView)
+```
+
+###Load and verify data of Rep 1
+```{r}
+rep1 <- read.csv("Data-obj1-New/At_PVY_1st_trial_New.csv", header=T)
+head(rep1)  # View the first few rows
+str(rep1)   # Check the structure of the data
+summary(rep1) # Quick statistical summary
+```
+
+###Make the factor variable
+```{r}
+rep1$Dpi<-as.factor(rep1$Dpi)
+```
+
+##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
+
+[Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
+
+```{r}
+rep1<-rep1 %>% 
+mutate (ViralLoad=((10^((Cq-49.153)/-3.93)))) %>% ##added a new column and named ViralLoad
+mutate(logViralLoad=log10(ViralLoad)) %>% 
+  filter(Dpi!="SL-14")##added a new column and named logViralLoad
+```
+
+##Classify the sample collection days based on leaf
+
+```{r}
+rep1$Leaf_sample<- ifelse(
+  grepl("^IL", rep1$Dpi), "Inoculated",  # Matches Dpi values starting with IL
+  ifelse(grepl("^SL", rep1$Dpi), "Systemic", NA)
+)
+```
+
+##Data summarization
+
+```{r}
+PVY1 <- rep1 %>%  # Start with the dataset `rep1` and pipe (%>%) it into the next operations
+  group_by(Dpi, Leaf_sample) %>%   # Group the data by treatment type and days post-inoculation (Dpi)
+  dplyr::summarize(
+    avg.virus= mean(logViralLoad, na.rm=TRUE),
+    n=n(),
+    se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
+```
+
+
+
+```{r PVY 1st trial_At }
+PVY_1 <- ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.5), width = 0.5, fill="#56B4E9") +
+   geom_errorbar(aes(ymin = avg.virus - se, 
+                    ymax = avg.virus + se),
+                width = 0.4,
+                position = position_dodge(width = 0.5)) +
+  labs(x = "Time Point (Dpi)", y = "Log Copy Number") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(face = "bold", size = 20, color = "black"),
+        legend.position = "none", 
+        axis.text.x = element_text(color = "black", face="bold", size=20),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=20),   # Y-axis text color
+        axis.title.x = element_text(color = "black", face="bold", size=20),  # X-axis label color
+        axis.title.y = element_text(color = "black", face="bold", size=20),  # Y-axis label color
+        axis.line = element_line(color = "black", size=0.75)      # Axis lines color
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+  )+
+  facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
+
+PVY_1
+
+```
+
+## Second trial
+###Load and verify data of Rep 2
+```{r}
+rep2 <- read.csv("Data-obj1-New/At_PVY_2nd_trial_New.csv", header=T)
+head(rep2)  # View the first few rows
+str(rep2)   # Check the structure of the data
+summary(rep2) # Quick statistical summary
+```
+
+###Make the factor variable
+```{r}
+rep2$Dpi<-as.factor(rep2$Dpi)
+```
+
+##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
+
+[Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
+
+```{r}
+rep2<-rep2 %>% 
+mutate (ViralLoad=((10^((Cq-49.153)/-3.93)))) %>%##added a new column and named ViralLoad
+mutate(logViralLoad=log10(ViralLoad)) %>% 
+  filter(Dpi!="SL-14")##added a new column and named logViralLoad
+```
+
+##Classify the sample collection days based on leaf
+
+```{r}
+rep2$Leaf_sample<- ifelse(
+  grepl("^IL", rep2$Dpi), "Inoculated",  # Matches Dpi values starting with IL
+  ifelse(grepl("^SL", rep2$Dpi), "Systemic", NA)
+)
+```
+
+##Data summarization
+
+```{r}
+PVY2 <- rep2 %>%  # Start with the dataset `rep2` and pipe (%>%) it into the next operations
+  group_by(Dpi, Leaf_sample) %>%   # Group the data by treatment type and days post-inoculation (Dpi)
+  dplyr::summarize(
+    avg.virus= mean(logViralLoad, na.rm=TRUE),
+    n=n(),
+    se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
+```
+
+
+
+```{r PVY 2nd trial_At }
+PVY_2 <- ggplot(PVY2,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.5), width = 0.5, fill="#56B4E9") +
+   geom_errorbar(aes(ymin = avg.virus - se, 
+                    ymax = avg.virus + se),
+                width = 0.4,
+                position = position_dodge(width = 0.5)) +
+  labs(x = "Time Point (Dpi)", y = "Log Copy Number") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(face = "bold", size = 20, color = "black"),
+        legend.position = "none", 
+        axis.text.x = element_text(color = "black", face="bold", size=20),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=20),   # Y-axis text color
+        axis.title.x = element_text(color = "black", face="bold", size=20),  # X-axis label color
+        axis.title.y = element_text(color = "black", face="bold", size=20),  # Y-axis label color
+        axis.line = element_line(color = "black", size=0.75)      # Axis lines color
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+  )+
+  facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
+PVY_2
+
+```
+
