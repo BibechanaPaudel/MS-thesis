@@ -1,0 +1,211 @@
+---
+title: "NB_PGPR_CMV"
+author: "Bibechana Paudel"
+date: "2025-10-29"
+output: html_document
+---
+###Libraries used
+
+```{r}
+#install.packages("tidyverse")
+#install.packages("ggplot2")
+#install.packages("agricolae")
+#install.packages("tidyr")
+#install.packages("ggpubr")
+#install.packages("multcomp")
+#install.packages("emmeans")
+#install.packages("multcompView")
+library(tidyverse)
+library(ggplot2)
+library(agricolae)
+library(tidyr)
+library(ggpubr)
+library(multcomp)
+library(emmeans)
+library(multcompView)
+library(stringr)
+```
+
+
+###Load and verify data of Rep 1
+```{r}
+rep <- read.csv("Data-obj3-New/Nb_PGPR_CMV_New.csv", header=T)
+head(rep)  # View the first few rows
+str(rep)   # Check the structure of the data
+summary(rep) # Quick statistical summary
+```
+
+###Make the factor variable
+```{r}
+rep$Treatment<-as.factor(rep$Treatment)
+rep$Dpi<-as.factor(rep$Dpi)
+#rep$Exp<-as.factor(rep$Exp)
+```
+
+##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
+
+[Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
+
+```{r}
+rep<-rep %>% 
+mutate (ViralLoad=((10^((Cq-37.416)/-3.353)))) %>% ##added a new column and named ViralLoad
+mutate(logViralLoad=log10(ViralLoad))  ##added a new column and named logViralLoad
+```
+
+
+
+## Statistical analysis
+```{r}
+library(dplyr)
+library(agricolae)
+library(purrr)
+library(tibble)
+
+model<-lm(logViralLoad~Treatment*Dpi,data=rep)
+car::Anova(model)
+
+# get all unique Dpi values
+dpi_levels <- unique(rep$Dpi)
+
+# function: fit lm -> run LSD.test -> extract groups
+run_lsd_per_dpi <- function(dpi_label) {
+  d <- subset(rep, Dpi == dpi_label)
+  fit <- aov(logViralLoad ~ Treatment, data = d)
+  lsd <- LSD.test(fit, "Treatment", p.adj = "none",alpha=0.05, group = TRUE)  # Fisher's LSD
+  
+  # Extract the group letters
+  out <- lsd$groups
+  out$Treatment <- rownames(out)
+  rownames(out) <- NULL
+  out <- as_tibble(out) %>% mutate(Dpi = dpi_label, .before = 1)
+  return(out)
+}
+
+# run for all DPIs
+lsd_results <- map_dfr(dpi_levels, run_lsd_per_dpi)
+
+# inspect
+lsd_results
+
+```
+
+##Data summarization
+
+```{r}
+CMV1 <- rep %>%  # Start with the dataset `rep` and pipe (%>%) it into the next operations
+  group_by(Treatment, Dpi) %>%   # Group the data by treatment type and days post-inoculation (Dpi)
+  dplyr::summarize(
+    avg.virus= mean(logViralLoad, na.rm=TRUE),
+    n=n(),
+    se = sd(logViralLoad)/sqrt(n)) %>% 
+ left_join(lsd_results,by=c("Dpi", "Treatment"))# join the significant letters with the CMV1 data frame.
+```
+
+##Classify the sample collection days based on leaf
+
+```{r}
+CMV1$Leaf_sample <- ifelse(
+  grepl("^IL", CMV1$Dpi), "Inoculated",  # Matches Dpi values starting with IL
+  ifelse(grepl("^SL", CMV1$Dpi), "Systemic", NA)
+)
+```
+
+## Visualization: Inoculated sample
+
+```{r}
+inoculated<-filter(CMV1, Dpi=="IL-1" | Dpi=="IL-4" | Dpi=="IL-7" | Dpi=="IL-10") #Subset the CMV1 data to include only specific timepoints labeled "IL-1", "IL-4", "IL-7", and "IL-10".
+inoculated$Treatment<-factor(inoculated$Treatment, levels=c("Control","P. fluorescens", "S. marcescens", "B. subtilis"))
+```
+
+
+```{r CMV on IL_1st trial_Nb }
+offset <- 0.05 * diff(range(inoculated$avg.virus + inoculated$se, na.rm = TRUE))
+cbbPalette <- c( "#56B4E9","#F0E442","#CC79A7", "#E69F00")  ##Load colour blind friendly cbbPalette
+CMV_IL<-ggplot(inoculated, aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10")), y =avg.virus , fill = Treatment)) +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.7), width = 0.6) +
+   geom_errorbar(aes(ymin = avg.virus - se, 
+                    ymax = avg.virus + se),
+                width = 0.4,
+                position = position_dodge(width = 0.7)) +
+geom_text(aes(y = avg.virus + se + offset, label = groups),position = position_dodge(width = 0.7), vjust = -0.5,size=4.5)+
+  theme_classic() +  #add the extracted significance letter to the bar
+  labs(title= "" ,
+       x = "",
+       y = "Log Copy Number") +  # labels of x and y axis
+  scale_fill_manual(values=cbbPalette,
+                    labels=c(expression(bold("Control")),expression(bolditalic("P. fluorescens")), 
+                             expression(bolditalic("S. marcescens")),expression(bolditalic("B. subtilis"))))+
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+  )+
+  theme(legend.position = "right",
+        legend.key.size = unit(0.5, "cm"),  # Adjusts the size of the legend keys
+        legend.title = element_blank(),  # Adjusts the legend title font size
+        legend.text = element_text(size = 11),
+               axis.text.x = element_text(color = "black", face="bold",size=11),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=11),   # Y-axis text color
+        axis.title.x = element_text(color = "black", size=11), 
+               axis.title.y = element_text(color = "black", face="bold", size=11),  # Y-axis label color
+        axis.line = element_line(color = "black")      # Axis lines color
+  )
+
+ CMV_IL
+```
+
+## Visualization: Systemic sample
+
+```{r}
+systemic<-filter(CMV1, Dpi=="SL-7" | Dpi=="SL-10" | Dpi=="SL-14")
+systemic$Treatment<-factor(systemic$Treatment, levels=c("Control","P. fluorescens", "S. marcescens",  "B. subtilis"))
+```
+
+
+```{r,CMV on SL_1st trial_Nb }
+offset <- 0.05 * diff(range(inoculated$avg.virus + systemic$se, na.rm = TRUE))
+cbbPalette <- c( "#56B4E9","#F0E442","#CC79A7", "#E69F00")
+CMV_SL<-ggplot(systemic, aes(x =factor(Dpi,levels=c("SL-7","SL-10","SL-14")), y =avg.virus , fill = Treatment)) +
+  stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.7), width = 0.6) +
+   geom_errorbar(aes(ymin = avg.virus - se, 
+                    ymax = avg.virus + se),
+                width = 0.4,
+                position = position_dodge(width = 0.7)) +geom_text(aes(y = avg.virus + se + offset, label = groups),position = position_dodge(width = 0.7), vjust = -0.5,size=4.5)+   ## Add group comparison letters
+  theme_classic() +
+  labs(title= "" ,
+       x = "",
+       y = "Log Copy Number") +
+  scale_fill_manual(values=cbbPalette,
+                    labels=c(expression(bold("Control")),expression(bolditalic("P. fluorescens")), 
+                             expression(bolditalic("S. marcescens")),expression(bolditalic("B. subtilis"))))+
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1)), breaks = seq(1, 9, by = 1)  # This removes padding at the bottom of the plot
+  )+
+  theme(legend.position = "right",
+        legend.key.size = unit(0.5, "cm"),  # Adjusts the size of the legend keys
+        legend.title = element_blank(),  # Adjusts the legend title font size
+        legend.text = element_text(size = 11),
+                axis.text.x = element_text(color = "black", face="bold", size=11),   # X-axis text color
+        axis.text.y = element_text(color = "black", face="bold", size=11),   # Y-axis text color
+        axis.title.x = element_text(color = "black",size=11),
+        axis.title.y = element_text(color = "black", face="bold", size=11),  # Y-axis label color
+        axis.line = element_line(color = "black")      # Axis lines color
+  )
+
+ CMV_SL
+```
+
+## Combined figure
+
+```{r, Combine fig 1st trial}
+CMV<-ggarrange(CMV_IL, CMV_SL,    #combine the  figures 
+                   nrow=1,
+                   ncol=2,
+                   common.legend=T,    # Gives the common legend for both figures
+                   widths=c(1.25,1))   # Makes the width of 1st fig 1.75 times more than 2nd fig
+CMV
+
+```
+
+
+
+
+
