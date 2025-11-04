@@ -269,7 +269,7 @@ combined_plot_PVY3 <- ggarrange(
   PVY_1_PVY3_1ng,
   PVY_2,
   ncol = 1,
-  labels = c("A", "B"),
+  labels = c("A", "B", "C"),
   align = "v"      # vertically align plots
 )
 
@@ -550,7 +550,7 @@ combined_plot_PVY1 <- ggarrange(
   PVY_1_PVY1_1ng,
   PVY_2_PVY1_10ng,
   ncol = 1,
-  labels = c("A", "B"),
+  labels = c("A", "B", "C"),
   align = "v"      # vertically align plots
 )
 
