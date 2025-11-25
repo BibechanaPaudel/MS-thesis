@@ -171,6 +171,7 @@ plot_gene_expression <- function(df, gene_subset = NULL,
       axis.text.y = element_text(color = "black", face = "bold", size = 10),
       axis.title.y = element_text(face = "bold", size = 12),
       axis.ticks.x= element_blank(),
+      axis.ticks.y= element_blank(),
       strip.text = element_text(face = "bold", size = 11),
       panel.border = element_rect(color = "black", fill = NA, linewidth = 0.6),
       axis.line = element_line(color = "black"),
@@ -279,7 +280,7 @@ blank <- ggplot() + theme_void()
 # Left column: ICS1 centered
 left_col <- annotate_figure(
   ggarrange(blank, ICS1, blank,
-            ncol = 1, nrow = 3, heights = c(1, 1.25, 1)),
+            ncol = 1, nrow = 3, heights = c(1, 1.5, 1)),
   top = text_grob("SA biosynthesis", face = "bold", size = 15,color="darkred")
 )
 sa_genes <- c("PR1","PR5","NPR1","EDS1","PAD4","RdR1")
@@ -299,7 +300,7 @@ right_col <- annotate_figure(
 
 # Combine side by side
 SA <- ggarrange(left_col, right_col,
-                    ncol = 2, widths = c(1, 2), common.legend = TRUE)
+                    ncol = 2, widths = c(1, 1.5), common.legend = TRUE)
 
 SA
 ```
@@ -313,7 +314,7 @@ library(gridExtra)
 empty <- ggplot() + theme_void()
 
 row1 <- annotate_figure(
-  ggarrange(empty, OPR3, empty, nrow = 3, heights = c(1, 2, 1)),
+  ggarrange(empty, OPR3, empty, nrow = 3, heights = c(1, 2.5, 1)),
   top = text_grob("JA biosynthesis", face = "bold", size = 15,color="darkred")
 )
 ja_genes <- c("PR4","PDF1.2")
@@ -333,9 +334,35 @@ row2 <- annotate_figure(
 # Combine both rows
 JA <- ggarrange(row1, row2,
                     ncol = 2, nrow = 1,
-                    heights = c(1, 1))  # adjust row height if needed
+                    heights = c(2, 1))  # adjust row height if needed
 
 JA
 
 
+```
+
+```{r}
+separator <- ggplot() +
+  geom_hline(yintercept = 0, color = "gray40", linewidth = 0.6) +
+  theme_void() +
+  coord_cartesian(ylim = c(-1, 1)) 
+SA <- SA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+
+JA<- JA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+combined_plot <- ggarrange(
+  SA,
+  separator,
+  JA,
+  ncol = 1,
+  labels = c("A","", "B"),
+  align = "v",
+  heights = c(1.3,0.05, 1) # vertically align plots
+)
+
+
+combined_plot
 ```

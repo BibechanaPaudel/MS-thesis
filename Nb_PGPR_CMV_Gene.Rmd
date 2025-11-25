@@ -19,7 +19,7 @@ library(multcompView)
 library(dplyr)
 ```
 
-##Load the dNba
+##Load the data
 
 ```{r}
 rep<-read.csv("Data-obj2-New/Nb_PGPR_CMV_Gene_New.csv", na.strings="na")
@@ -34,7 +34,8 @@ rep$PGPR<-factor(rep$PGPR, levels=c("P. fluorescens", "S. marcescens","B. subtil
 rep$Dpi<-as.factor(rep$Dpi)
 rep$Gene<-as.factor(rep$Gene)
 ```
-## ΔCt
+
+##calculate ΔCt
 ```{r}
 #Step 1: Split into target genes and internal control
 # First calculNbe ΔCt = Cq_target - Cq_UBQ for each treNbment/time/rep
@@ -50,7 +51,7 @@ rep_dct <- rep %>%
   mutate(DeltaCt = Cq - UBQ)
 ```
 
-## ΔΔCt and fold change
+##calculate ΔΔCt and fold change
 ```{r}
 # Step 2: Compute ΔΔCt for each Gene and Dpi, using "Control" treNbment as reference
 # Step 3: CalculNbe ΔΔCt by subtracting the ΔCt of Control Nb the corresponding Dpi and Gene
@@ -72,7 +73,7 @@ Relative_expression<-Relative_expression %>%
 dplyr::select(PGPR, Gene, Dpi,Rep,log2FC, FC)
 ```
 
-##CalculNbe mean fold change
+##Calculate mean fold change
 ```{r}
 summary_df <- Relative_expression %>%
   group_by(PGPR, Dpi, Gene) %>%
@@ -297,4 +298,31 @@ JA <- ggarrange(row1, row2,
 JA
 
 
+```
+
+
+```{r}
+separator <- ggplot() +
+  geom_hline(yintercept = 0, color = "gray40", linewidth = 0.6) +
+  theme_void() +
+  coord_cartesian(ylim = c(-1, 1)) 
+SA <- SA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+
+JA<- JA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+combined_plot <- ggarrange(
+  SA,
+  separator,
+  JA,
+  ncol = 1,
+  labels = c("A","", "B"),
+  align = "v",
+  heights = c(2,0.05, 1) # vertically align plots
+)
+
+
+combined_plot
 ```

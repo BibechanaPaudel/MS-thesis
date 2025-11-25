@@ -75,7 +75,7 @@ PVY1 <- rep1 %>%  # Start with the dataset `rep1` and pipe (%>%) it into the nex
 
 
 ```{r PVY 1st trial_At }
-PVY_1 <-  ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
+PVY_1_at <-  ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
    geom_errorbar(aes(ymin = avg.virus - se, 
                     ymax = avg.virus + se),
@@ -98,7 +98,7 @@ PVY_1 <-  ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10"
    scale_x_discrete(drop = TRUE) +
   facet_grid(~Leaf_sample, scale="free_x", space="free_x")# Sets y-axis limits but removes points outside 0-8
 
-PVY_1
+PVY_1_at
 
 ```
 
@@ -182,12 +182,12 @@ PVY_1 <- PVY_1 +
   labs(x = NULL, y = NULL) +
   theme(axis.title = element_blank())
 
-PVY_2 <- PVY_2 +
+PVY_1_at <- PVY_1_at +
   labs(x = NULL, y = NULL) +
   theme(axis.title = element_blank())
 combined_plot_PVY3 <- ggarrange(
   PVY_1,
-    PVY_2,
+    PVY_1_at,
   ncol = 1,
   labels = c("A", "B"),
   align = "v"      # vertically align plots

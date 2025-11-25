@@ -336,3 +336,30 @@ JA
 
 
 ```
+
+
+```{r}
+separator <- ggplot() +
+  geom_hline(yintercept = 0, color = "gray40", linewidth = 0.6) +
+  theme_void() +
+  coord_cartesian(ylim = c(-1, 1)) 
+SA <- SA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+
+JA<- JA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+combined_plot <- ggarrange(
+  SA,
+  separator,
+  JA,
+  ncol = 1,
+  labels = c("A","", "B"),
+  align = "v",
+  heights = c(1,0.05, 1) # vertically align plots
+)
+
+
+combined_plot
+```
