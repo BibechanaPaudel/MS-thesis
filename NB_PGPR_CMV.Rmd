@@ -2,9 +2,14 @@
 title: "NB_PGPR_CMV"
 author: "Bibechana Paudel"
 date: "2025-10-29"
-output: html_document
+output: 
+  html_document:
+     toc: TRUE
+     toc_float: TRUE
+  md_document: 
+    variant: gfm
 ---
-###Libraries used
+## Libraries used
 
 ```{r}
 #install.packages("tidyverse")
@@ -27,9 +32,9 @@ library(stringr)
 ```
 
 
-###Load and verify data of Rep 1
+## Load the data
 ```{r}
-rep <- read.csv("Data-obj3-New/Nb_PGPR_CMV_New.csv", header=T)
+rep<- read.csv("Data-obj3-New/Nb_PGPR_CMV_New.csv", header=T)
 head(rep)  # View the first few rows
 str(rep)   # Check the structure of the data
 summary(rep) # Quick statistical summary
@@ -41,7 +46,7 @@ rep$Treatment<-as.factor(rep$Treatment)
 rep$Dpi<-as.factor(rep$Dpi)
 #rep$Exp<-as.factor(rep$Exp)
 ```
-
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -51,8 +56,6 @@ rep<-rep %>%
 mutate (ViralLoad=((10^((Cq-37.416)/-3.353)))) %>% ##added a new column and named ViralLoad
 mutate(logViralLoad=log10(ViralLoad))  ##added a new column and named logViralLoad
 ```
-
-
 
 ## Statistical analysis
 ```{r}
@@ -110,15 +113,13 @@ CMV1$Leaf_sample <- ifelse(
 )
 ```
 
-## Visualization: Inoculated sample
-
 ```{r}
 inoculated<-filter(CMV1, Dpi=="IL-1" | Dpi=="IL-4" | Dpi=="IL-7" | Dpi=="IL-10") #Subset the CMV1 data to include only specific timepoints labeled "IL-1", "IL-4", "IL-7", and "IL-10".
 inoculated$Treatment<-factor(inoculated$Treatment, levels=c("Control","P. fluorescens", "S. marcescens", "B. subtilis"))
 ```
 
-
-```{r CMV on IL_1st trial_Nb }
+## Visualization: Inoculated sample
+```{r CMV on IL_Nb }
 offset <- 0.05 * diff(range(inoculated$avg.virus + inoculated$se, na.rm = TRUE))
 cbbPalette <- c( "#56B4E9","#F0E442","#CC79A7", "#E69F00")  ##Load colour blind friendly cbbPalette
 CMV_IL<-ggplot(inoculated, aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10")), y =avg.virus , fill = Treatment)) +
@@ -152,15 +153,13 @@ geom_text(aes(y = avg.virus + se + offset, label = groups),position = position_d
  CMV_IL
 ```
 
-## Visualization: Systemic sample
-
 ```{r}
 systemic<-filter(CMV1, Dpi=="SL-7" | Dpi=="SL-10" | Dpi=="SL-14")
 systemic$Treatment<-factor(systemic$Treatment, levels=c("Control","P. fluorescens", "S. marcescens",  "B. subtilis"))
 ```
 
-
-```{r,CMV on SL_1st trial_Nb }
+## Visualization: Systemic sample
+```{r,CMV on SL_Nb }
 offset <- 0.05 * diff(range(inoculated$avg.virus + systemic$se, na.rm = TRUE))
 cbbPalette <- c( "#56B4E9","#F0E442","#CC79A7", "#E69F00")
 CMV_SL<-ggplot(systemic, aes(x =factor(Dpi,levels=c("SL-7","SL-10","SL-14")), y =avg.virus , fill = Treatment)) +
@@ -195,12 +194,12 @@ CMV_SL<-ggplot(systemic, aes(x =factor(Dpi,levels=c("SL-7","SL-10","SL-14")), y 
 
 ## Combined figure
 
-```{r, Combine fig 1st trial}
+```{r, Combine fig}
 CMV<-ggarrange(CMV_IL, CMV_SL,    #combine the  figures 
                    nrow=1,
                    ncol=2,
                    common.legend=T,    # Gives the common legend for both figures
-                   widths=c(1.25,1))   # Makes the width of 1st fig 1.75 times more than 2nd fig
+                   widths=c(1.25,1))   # Makes the width of 1st fig 1.25 times more than 2nd fig
 CMV
 
 ```
