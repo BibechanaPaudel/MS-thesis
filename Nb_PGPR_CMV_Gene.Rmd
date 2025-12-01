@@ -174,7 +174,7 @@ PR1<-plot_gene_expression(df = summary_df,
 )
 ```
 
-## NPR1
+### NPR1
 ```{r, NPR1}
 NPR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("NPR1"),
@@ -183,7 +183,7 @@ NPR1<-plot_gene_expression(df = summary_df,
 )
 ```
 
-## PDF1.2
+### PDF1.2
 ```{r, PDF1.2}
 PDF1.2<-plot_gene_expression(df = summary_df,
   gene_subset = c("PDF1.2"),
@@ -192,7 +192,7 @@ PDF1.2<-plot_gene_expression(df = summary_df,
 )
 ```
 
-## ICS1
+### ICS1
 ```{r, ICS1}
 ICS1<-plot_gene_expression(df = summary_df,
   gene_subset = c("ICS1"),
@@ -201,7 +201,7 @@ ICS1<-plot_gene_expression(df = summary_df,
 )
 ```
 
-## OPR3
+### OPR3
 ```{r, OPR3}
 OPR3<-plot_gene_expression(df = summary_df,
   gene_subset = c("OPR3"),
@@ -210,7 +210,7 @@ OPR3<-plot_gene_expression(df = summary_df,
 )
 ```
 
-## RdR1
+### RdR1
 ```{r, RdR1}
 RdR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("RdR1"),
