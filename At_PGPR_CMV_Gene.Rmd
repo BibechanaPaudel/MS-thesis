@@ -2,11 +2,15 @@
 title: "At_PGPR_CMV_Gene"
 author: "Bibechana Paudel"
 date: "2025-10-24"
-output: html_document
+output: 
+  html_document:
+     toc: TRUE
+     toc_float: TRUE
+  md_document: 
+    variant: gfm
 ---
-## First trial
 
-##Load the library
+## Library used
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -17,15 +21,16 @@ library(multcomp)
 library(emmeans)
 library(multcompView)
 library(dplyr)
+library(gridExtra)
 ```
 
-##Load the data
+## Load the data
 
 ```{r}
 rep<-read.csv("Data-obj2-New/At_PGPR_CMV_Gene_Combine.csv", na.strings="na")
-head(rep)
-str(rep)
-summary(rep)
+head(rep) # Display the first few rows of the dataset.
+str(rep) # Show the structure of the dataset.
+summary(rep) # Summary statistics for each column.
 ```
 
 ##Make the factor variable
@@ -35,73 +40,59 @@ rep$Dpi<-as.factor(rep$Dpi)
 rep$Gene<-as.factor(rep$Gene)
 ```
 ## ΔCt
-```{r}
-#Step 1: Split into target genes and internal control
-# First calculate ΔCt = Cq_target - Cq_UBQ for each treatment/time/rep
-# Spread UBQ values so they can be joined
+```{r, ΔCt}
 ubq_values<-rep %>% 
-filter(Gene == "UBQ") %>% 
-pivot_wider(values_from = Cq, names_from=Gene) 
-
-# Join UBQ values to all rows
+filter(Gene == "UBQ") %>% # Extract UBQ Cq values for each sample, because UBQ is our reference gene.
+pivot_wider(values_from = Cq, names_from=Gene) # pivot_wider() converts long format → wide format so that each row has a UBQ column.
 rep_dct <- rep %>%
-  filter(Gene != "UBQ") %>%
-  left_join(ubq_values, by = c("PGPR", "Dpi", "Rep")) %>%
-  mutate(DeltaCt = Cq - UBQ)
+  filter(Gene != "UBQ") %>% # Remove UBQ rows (because we only calculate ΔCt for target genes)
+  left_join(ubq_values, by = c("PGPR", "Dpi", "Rep")) %>% # Join UBQ values using PGPR, Dpi, and Rep as matching variables
+  mutate(DeltaCt = Cq - UBQ) # Create a new DeltaCt column: Ct(gene) – Ct(UBQ)
 ```
 
 ## ΔΔCt and fold change
 ```{r}
-# Step 2: Compute ΔΔCt for each Gene and Dpi, using "Control" treatment as reference
-# Step 3: Calculate ΔΔCt by subtracting the ΔCt of Control at the corresponding Dpi and Gene
-# We'll do this using group_by for Gene and Dpi
 
-# First, extract the Control ΔCt values to use as reference
-control_dct <- filter(rep_dct,PGPR == "Control") %>%  
-pivot_wider(values_from=DeltaCt, names_from=PGPR) %>% 
+control_dct <- filter(rep_dct,PGPR == "Control") %>%  # Extract only the Control samples from the ΔCt table
+pivot_wider(values_from=DeltaCt, names_from=PGPR) %>% # Reshape so that Control ΔCt becomes its own column
+  # values_from = DeltaCt → the ΔCt values for control
+  # names_from = PGPR → column will be named "Control"
 left_join(rep_dct, control_dct, by=c("Gene", "Dpi", "Rep"))
   
+# Calculate ΔΔCt, fold change (FC), and log2FC
 
-# Join the control ΔCt to all rows by Gene, Dpi, and Rep
-#rep_ddct <- rep_dct %>%
-#left_join(control_dct, by = c( "Dpi", "Rep")) %>%
 Relative_expression<-mutate(control_dct, DeltaDeltaCt = DeltaCt - Control) %>% 
 mutate(FC = 2^(-DeltaDeltaCt)) %>% 
   mutate(log2FC=log2(FC))
 Relative_expression<-Relative_expression %>% 
-dplyr::select(PGPR, Gene, Dpi,Rep,log2FC, FC)
+dplyr::select(PGPR, Gene, Dpi,Rep,log2FC, FC) # Select the final columns for output
 ```
 
-##Calculate mean fold change
+## Mean fold change
 ```{r}
 summary_df <- Relative_expression %>%
-  group_by(PGPR, Dpi, Gene) %>%
+  group_by(PGPR, Dpi, Gene) %>% # Group by treatment, time point, and gene
   filter(PGPR!="Control") %>% 
   summarise(
-    MeanFC = mean(FC, na.rm = TRUE),
-    Meanlog2FC=mean(log2FC,na.rm = TRUE),
-    SE_FC = sd(FC, na.rm = TRUE) / sqrt(n()), 
-    SE_log2FC=sd(log2FC,na.rm = TRUE) / sqrt(n()), # Standard error
-    .groups = "drop"
+    MeanFC = mean(FC, na.rm = TRUE), # Mean fold change across replicates
+    Meanlog2FC=mean(log2FC,na.rm = TRUE), # Mean log2 fold change
+    SE_FC = sd(FC, na.rm = TRUE) / sqrt(n()), # Standard error of FC
+    SE_log2FC=sd(log2FC,na.rm = TRUE) / sqrt(n()), # S# Standard error of log2FC
+    .groups = "drop" # Ungroup after summarising
   )
 ```
 
 ## Plot
 
 ```{r}
-# Function to plot a gene
-
-library(ggplot2)
-library(dplyr)
-
 blue_gradient <- colorRampPalette(c("#7AD3F6", "#163E64"))(4)
 
 plot_gene_expression <- function(df, gene_subset = NULL,
                                  gene_order = NULL, pgpr_order = NULL) {
   df <- df %>%
-    filter(PGPR != "Control") %>%
+    filter(PGPR != "Control") %>%  # Remove Control from plotting
     mutate(
-      Dpi = factor(Dpi, levels = c("1", "4", "7","10")),
+      Dpi = factor(Dpi, levels = c("1", "4", "7","10")), # Order of Dpi levels  
       Gene = if (!is.null(gene_order)) factor(Gene, levels = gene_order) else Gene,
       PGPR = if (!is.null(pgpr_order)) factor(PGPR, levels = pgpr_order) else PGPR,
       lower = Meanlog2FC - SE_log2FC,
@@ -110,34 +101,28 @@ plot_gene_expression <- function(df, gene_subset = NULL,
 
   if (!is.null(gene_subset)) df <- df %>% filter(Gene %in% gene_subset)
 
-  y_limits <- c(-8, 4)
+  y_limits <- c(-8, 4) # Y-axis limits for log2FC
   num_pgpr <- length(unique(df$PGPR))
   num_dpi  <- length(unique(df$Dpi))
 
-  ggplot(df, aes(x = PGPR, y = Meanlog2FC, fill = Dpi)) +
-    geom_col(position = position_dodge(width = 1), width = 0.8) +
+  ggplot(df, aes(x = PGPR, y = Meanlog2FC, fill = Dpi)) + # Bar plot of mean log2FC per treatment and Dpi
+    geom_col(position = position_dodge(width = 1), width = 0.8) + # Error bars using precomputed lower and upper limits
     geom_errorbar(
       aes(ymin = lower, ymax = upper),
       width = 0.3,
       position = position_dodge(width = 1)
     ) +
-    # Red baseline only
-    geom_hline(yintercept = 0, color = "red", linewidth = 0.5) +
+    
+    geom_hline(yintercept = 0, color = "red", linewidth = 0.5) + # Red baseline at 0 (no change relative to control)
     geom_hline(yintercept = 1, color = "blue", linetype = "dashed", size = 0.6) +
-    geom_hline(yintercept = -1, color = "blue", linetype = "dashed", size = 0.6) +
+    geom_hline(yintercept = -1, color = "blue", linetype = "dashed", size = 0.6) +# Blue dotted lines at log2FC = ±1 (biological significance threshold)
     # Facet each gene separately
     facet_wrap(~ Gene, scales = "free_x", nrow = 1) +
-    # Grey dividers between Dpi groups (within each treatment)
-    #geom_vline(
-     # xintercept = rep(seq(0.5, num_pgpr - 0.5, by = 1), each = num_dpi - 1) +
-        #rep(seq(1, num_dpi - 1) / num_dpi, times = num_pgpr),
-      #color = "grey80", linewidth = 0.5
-    #) +
-    # Black dividers between PGPR treatments
-    geom_vline(
+   
+        geom_vline(
       xintercept = seq(1.5, num_pgpr - 0.05, by = 1),
       color = "black", linewidth = 0.6
-    ) +
+    ) + # Black vertical lines between PGPR treatments
     scale_fill_manual(values = blue_gradient, name = "Dpi") +
     scale_y_continuous(
       limits = y_limits,
@@ -169,17 +154,16 @@ plot_gene_expression <- function(df, gene_subset = NULL,
       strip.text = element_text(face = "bold", size = 11),
       panel.border = element_rect(color = "black", fill = NA, linewidth = 0.6),
       axis.line = element_line(color = "black"),
-      plot.margin = margin(5, 10, 5, 5),
-      panel.spacing = unit(0.3, "lines")
+      plot.margin = margin(5, 10, 5, 5), # Margins around plot
+      panel.spacing = unit(0.3, "lines") # Spacing between facets
       
     )
 }
 
 ```
 
-
+### PR1
 ```{r, PR1}
-# Plot for PR1
 PR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("PR1"),
  gene_order = c("PR1"),
@@ -187,7 +171,7 @@ PR1<-plot_gene_expression(df = summary_df,
 )
 ```
 
-
+### NPR1
 ```{r, NPR1}
 NPR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("NPR1"),
@@ -196,6 +180,7 @@ NPR1<-plot_gene_expression(df = summary_df,
 )
 ```
 
+### PDF1.2
 ```{r, PDF1.2}
 PDF1.2<-plot_gene_expression(df = summary_df,
   gene_subset = c("PDF1.2"),
@@ -204,7 +189,7 @@ PDF1.2<-plot_gene_expression(df = summary_df,
 )
 ```
 
-
+### ICS1
 ```{r, ICS1}
 ICS1<-plot_gene_expression(df = summary_df,
   gene_subset = c("ICS1"),
@@ -213,7 +198,7 @@ ICS1<-plot_gene_expression(df = summary_df,
 )
 ```
 
-
+### OPR3
 ```{r, OPR3}
 OPR3<-plot_gene_expression(df = summary_df,
   gene_subset = c("OPR3"),
@@ -222,7 +207,7 @@ OPR3<-plot_gene_expression(df = summary_df,
 )
 ```
 
-
+### Thi2.1
 ```{r, Thi2.1}
 Thi2.1<-plot_gene_expression(df = summary_df,
   gene_subset = c("Thi2.1"),
@@ -231,6 +216,7 @@ Thi2.1<-plot_gene_expression(df = summary_df,
 )
 ```
 
+### RdR1
 ```{r, RdR1}
 RdR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("RdR1"),
@@ -239,8 +225,9 @@ RdR1<-plot_gene_expression(df = summary_df,
 )
 ```
 
+## SA-based genes
 ```{r, SA_At}
-# Blank plots to balance spacing
+# Create an empty blank plot
 blank <- ggplot() + theme_void()
 
 # Left column: ICS1 centered
@@ -249,8 +236,9 @@ left_col <- annotate_figure(
             ncol = 1, nrow = 3, heights = c(1, 1.4, 1)),
   top = text_grob("SA biosynthesis", face = "bold", size = 15,color="darkred")
 )
-sa_genes <- c("PR1","NPR1","RdR1")
+sa_genes <- c("PR1","NPR1","RdR1") # Define the SA-responsive genes
 
+# Right column: plot SA-responsive genes 
 right_col <- annotate_figure(
   plot_gene_expression(
     df          = summary_df,
@@ -264,17 +252,16 @@ right_col <- annotate_figure(
 # Right column: other genes
 
 
-# Combine side by side
+# Combine figure
 SA <- ggarrange(left_col, right_col,
                     ncol = 2, widths = c(1, 1), common.legend = TRUE)
 
 SA
 ```
 
+## JA/ET-based genes
 ```{r, JA_At}
-library(ggpubr)
-library(ggplot2)
-library(gridExtra)
+
 
 # Row 1: keep OPR3 centered with empty plots left/right
 empty <- ggplot() + theme_void()
@@ -307,19 +294,22 @@ JA
 
 ```
 
-
+## Combined plot
 ```{r}
+# Create a separator plot (a thin horizontal gray line between SA and JA sections)
 separator <- ggplot() +
   geom_hline(yintercept = 0, color = "gray40", linewidth = 0.6) +
-  theme_void() +
-  coord_cartesian(ylim = c(-1, 1)) 
+  theme_void() + # remove all plot elements
+  coord_cartesian(ylim = c(-1, 1))  # limit vertical space 
 SA <- SA +
-  labs(x = NULL, y = NULL) +
-  theme(axis.title = element_blank())
+  labs(x = NULL, y = NULL) +  # remove axis labels
+  theme(axis.title = element_blank()) # also remove axis title elements
 
 JA<- JA +
   labs(x = NULL, y = NULL) +
   theme(axis.title = element_blank())
+
+#combine two plots
 combined_plot <- ggarrange(
   SA,
   separator,
