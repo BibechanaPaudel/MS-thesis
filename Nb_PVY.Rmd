@@ -2,12 +2,17 @@
 title: "Nb_PVY"
 author: "Bibechana Paudel"
 date: "2025-10-29"
-output: html_document
+output: 
+  html_document:
+     toc: TRUE
+     toc_float: TRUE
+  md_document: 
+    variant: gfm
 ---
 
 # **First trial**
 
-###Libraries used
+# Libraries used
 
 ```{r}
 #install.packages("tidyverse")
@@ -28,7 +33,7 @@ library(emmeans)
 library(multcompView)
 ```
 
-###Load and verify data of Rep 1
+## Load the data
 ```{r}
 rep1 <- read.csv("Data-obj1-New/Nb_PVY_1st_trial_New.csv", header=T)
 head(rep1)  # View the first few rows
@@ -41,6 +46,7 @@ summary(rep1) # Quick statistical summary
 rep1$Dpi<-as.factor(rep1$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -71,8 +77,6 @@ PVY1 <- rep1 %>%  # Start with the dataset `rep1` and pipe (%>%) it into the nex
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r PVY 1st trial_NB_PVY3_10ng }
 PVY_1 <- ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -101,8 +105,8 @@ PVY_1
 
 ```
 
-## Second trial
-###Load and verify data of Rep 2
+# **Second trial**
+## Load the data
 ```{r}
 rep2 <- read.csv("Data-obj1-New/Nb_PVY_2nd_trial_New.csv", header=T)
 head(rep2)  # View the first few rows
@@ -115,6 +119,7 @@ summary(rep2) # Quick statistical summary
 rep2$Dpi<-as.factor(rep2$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -146,8 +151,6 @@ PVY2 <- rep2 %>%  # Start with the dataset `rep2` and pipe (%>%) it into the nex
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r PVY 2nd trial_NB_PVY3_10ng }
 PVY_2 <- ggplot(PVY2,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -176,8 +179,8 @@ PVY_2
 
 ```
 
-
-###Load and verify data of Rep 1
+# **Supplementary First Trial**
+## Load the data
 ```{r}
 rep1_PVY3_1ng <- read.csv("Data-obj1-New/Nb_PVY_1st_PVY3_1ng.csv", header=T)
 head(rep1_PVY3_1ng)  # View the first few rows
@@ -190,6 +193,7 @@ summary(rep1_PVY3_1ng) # Quick statistical summary
 rep1_PVY3_1ng$Dpi<-as.factor(rep1_PVY3_1ng$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -220,8 +224,6 @@ PVY1 <- rep1_PVY3_1ng %>%  # Start with the dataset `rep1` and pipe (%>%) it int
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r PVY 1st trial_NB_PVY3_1ng }
 PVY_1_PVY3_1ng <- ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -251,12 +253,11 @@ PVY_1_PVY3_1ng
 
 ```
 
-
-
-```{r}
+## PVY3_Nb
+```{r, PVY3_Nb}
 PVY_1 <- PVY_1 +
-  labs(x = NULL, y = NULL) +
-  theme(axis.title = element_blank())
+  labs(x = NULL, y = NULL) + #Remove x and y labels
+  theme(axis.title = element_blank()) # Remove axis titles
 PVY_1_PVY3_1ng<-PVY_1_PVY3_1ng+
   labs(x = NULL, y = NULL) +
   theme(axis.title = element_blank())
@@ -264,6 +265,7 @@ PVY_1_PVY3_1ng<-PVY_1_PVY3_1ng+
 PVY_2 <- PVY_2 +
   labs(x = NULL, y = NULL) +
   theme(axis.title = element_blank())
+# Combine figures and add shared axis titles
 combined_plot_PVY3 <- ggarrange(
   PVY_1,
   PVY_1_PVY3_1ng,
@@ -282,32 +284,7 @@ combined_plot_PVY3_annotated <- annotate_figure(
 combined_plot_PVY3_annotated
 ```
 
-
-
-# **Supplementary First trial**
-
-###Libraries used
-
-```{r}
-#install.packages("tidyverse")
-#install.packages("ggplot2")
-#install.packages("agricolae")
-#install.packages("tidyr")
-#install.packages("ggpubr")
-#install.packages("multcomp")
-#install.packages("emmeans")
-#install.packages("multcompView")
-library(tidyverse)
-library(ggplot2)
-library(agricolae)
-library(tidyr)
-library(ggpubr)
-library(multcomp)
-library(emmeans)
-library(multcompView)
-```
-
-###Load and verify data of Rep 1
+## Load the data
 ```{r}
 rep1_PVY1_10ng <- read.csv("Data-obj1-New/Nb_PVY_1st_PVY1_10ng.csv", header=T)
 head(rep1_PVY1_10ng)  # View the first few rows
@@ -320,6 +297,7 @@ summary(rep1_PVY1_10ng) # Quick statistical summary
 rep1_PVY1_10ng$Dpi<-as.factor(rep1_PVY1_10ng$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -350,8 +328,6 @@ PVY1 <- rep1_PVY1_10ng %>%  # Start with the dataset `rep1` and pipe (%>%) it in
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r PVY 1st trial_NB_PVY1_10ng }
 PVY_1_PVY1_10ng <- ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -381,7 +357,7 @@ PVY_1_PVY1_10ng
 ```
 
 
-###Load and verify data of Rep 1
+## Load the data
 ```{r}
 rep1_PVY1_1ng <- read.csv("Data-obj1-New/Nb_PVY_1st_PVY1_1ng.csv", header=T)
 head(rep1_PVY1_1ng)  # View the first few rows
@@ -394,6 +370,7 @@ summary(rep1_PVY1_1ng) # Quick statistical summary
 rep1_PVY1_1ng$Dpi<-as.factor(rep1_PVY1_1ng$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -424,8 +401,6 @@ PVY1 <- rep1_PVY1_1ng %>%  # Start with the dataset `rep1` and pipe (%>%) it int
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r PVY 1st trial_NB_PVY1_1ng }
 PVY_1_PVY1_1ng <- ggplot(PVY1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -453,14 +428,8 @@ PVY_1_PVY1_1ng
 
 ```
 
-
-
-
-
-
-
-## Second trial
-###Load and verify data of Rep 2
+# **Supplementary Second trial**
+## Load the data
 ```{r}
 rep2_PVY1_10ng <-read.csv("Data-obj1-New/Nb_PVY_2nd_PVY1_10ng.csv", header=T)
 head(rep2_PVY1_10ng)  # View the first few rows
@@ -473,6 +442,7 @@ summary(rep2_PVY1_10ng) # Quick statistical summary
 rep2_PVY1_10ng$Dpi<-as.factor(rep2_PVY1_10ng$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -534,7 +504,8 @@ PVY_2_PVY1_10ng
 
 ```
 
-```{r}
+## PVY1_Nb
+```{r, PVY1_Nb}
 PVY_1_PVY1_10ng <- PVY_1_PVY1_10ng +
   labs(x = NULL, y = NULL) +
   theme(axis.title = element_blank())

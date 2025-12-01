@@ -2,12 +2,17 @@
 title: "At_CMV"
 author: "Bibechana Paudel"
 date: "2025-10-28"
-output: html_document
+output: 
+  html_document:
+     toc: TRUE
+     toc_float: TRUE
+  md_document: 
+    variant: gfm
 ---
 
 # **First trial**
 
-###Libraries used
+# Libraries used
 
 ```{r}
 #install.packages("tidyverse")
@@ -28,7 +33,7 @@ library(emmeans)
 library(multcompView)
 ```
 
-###Load and verify data of Rep 1
+## Load the data
 ```{r}
 rep1 <- read.csv("Data-obj1-New/At_CMV_1st_trial_New.csv", header=T)
 head(rep1)  # View the first few rows
@@ -40,7 +45,7 @@ summary(rep1) # Quick statistical summary
 ```{r}
 rep1$Dpi<-as.factor(rep1$Dpi)
 ```
-
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -72,8 +77,6 @@ CMV1 <- rep1 %>%  # Start with the dataset `rep1` and pipe (%>%) it into the nex
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r CMV 1st trial_ At }
 CMV_1 <- ggplot(CMV1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -102,8 +105,8 @@ CMV_1
 
 ```
 
-## Second trial
-###Load and verify data of Rep 1
+# **Second trial**
+## Load the data
 ```{r}
 rep2 <- read.csv("Data-obj1-New/At_CMV_2nd_trial_New.csv", header=T)
 head(rep2)  # View the first few rows
@@ -116,6 +119,7 @@ summary(rep2) # Quick statistical summary
 rep2$Dpi<-as.factor(rep2$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -177,11 +181,11 @@ CMV_2
 
 ```
 
-
-```{r}
+## RNA3_At
+```{r, RNA3_At}
 CMV_1 <- CMV_1 +
-  labs(x = NULL, y = NULL) +
-  theme(axis.title = element_blank())
+  labs(x = NULL, y = NULL) + # Remove axis labels
+  theme(axis.title = element_blank()) # Remove axis titles
 
 CMV_2 <- CMV_2 +
   labs(x = NULL, y = NULL) +
@@ -203,9 +207,9 @@ combined_plot_RNA3_annotated <- annotate_figure(
 combined_plot_RNA3_annotated
 ```
 
+# **Supplementary First Trial**
 
-
-###Load and verify data of Rep 1
+## Load the data
 ```{r}
 rep1_CP_1ng <- read.csv("Data-obj1-New/At_CMV_1st_CP_1ng.csv", header=T)
 head(rep1_CP_1ng)  # View the first few rows
@@ -218,6 +222,7 @@ summary(rep1_CP_1ng) # Quick statistical summary
 rep1_CP_1ng$Dpi<-as.factor(rep1_CP_1ng$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -248,8 +253,6 @@ CMV1 <- rep1_CP_1ng %>%  # Start with the dataset `rep1` and pipe (%>%) it into 
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r CMV 1st trial_At_CP_1ng }
 CMV_1_CP_1ng <- ggplot(CMV1,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -279,9 +282,8 @@ CMV_1_CP_1ng
 
 ```
 
-
-## Supplementary Second trial
-###Load and verify data of Rep 2
+# **Supplementary Second trial**
+## Load the data
 ```{r}
 rep2_CP_1ng <-read.csv("Data-obj1-New/At_CMV_2nd_CP_1ng.csv", header=T)
 head(rep2_CP_1ng)  # View the first few rows
@@ -294,6 +296,7 @@ summary(rep2_CP_1ng) # Quick statistical summary
 rep2_CP_1ng$Dpi<-as.factor(rep2_CP_1ng$Dpi)
 ```
 
+## Viral load
 ##Calculate the ViralLoad using the regression equation derived by (Feng , J.L et al., 2006 ) and log transform for normality.
 
 [Feng, J.L et al., 2006](https://academic.oup.com/abbs/article/38/10/669/217)
@@ -324,8 +327,6 @@ CMV2 <- rep2_CP_1ng %>%  # Start with the dataset `rep2_CP_1ng` and pipe (%>%) i
     se = sd(logViralLoad)/sqrt(n)) # join the significant letters with the PVY1 data frame.
 ```
 
-
-
 ```{r CMV 2nd trial_At_CP_1ng}
 CMV_2_CP_1ng <- ggplot(CMV2,aes(x =factor(Dpi,levels=c("IL-1", "IL-4", "IL-7", "IL-10","SL-7", "SL-10")), y = avg.virus)) +
   stat_summary(fun=mean,geom="bar", position = position_dodge(width = 0.3), width = 0.4, fill="#56B4E9") +
@@ -355,11 +356,11 @@ CMV_2_CP_1ng
 
 ```
 
-
-```{r}
+## CP_At
+```{r, CP_At}
 CMV_1_CP_1ng <- CMV_1 +
-  labs(x = NULL, y = NULL) +
-  theme(axis.title = element_blank())
+  labs(x = NULL, y = NULL) + # Remove x and y labels
+  theme(axis.title = element_blank()) #Remove axis title
 
 CMV_2_CP_1ng<- CMV_2 +
   labs(x = NULL, y = NULL) +
