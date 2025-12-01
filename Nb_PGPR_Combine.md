@@ -1,6 +1,4 @@
-## First trial
-
-\##Load the library
+## Library used
 
 ``` r
 library(tidyverse)
@@ -56,7 +54,7 @@ library(multcompView)
 library(dplyr)
 ```
 
-\##Load the data
+## Load the data
 
 ``` r
 rep<-read.csv("Data-obj2-New/Nb_PGPR_New_Combine.csv", na.strings="na")
@@ -105,55 +103,45 @@ rep$Gene<-as.factor(rep$Gene)
 ## ΔCt
 
 ``` r
-#Step 1: Split into target genes and internal control
-# First calculate ΔCt = Cq_target - Cq_UBQ for each treatment/time/rep
-# Spread UBQ values so they can be joined
 ubq_values<-rep %>% 
-filter(Gene == "UBQ") %>% 
-pivot_wider(values_from = Cq, names_from=Gene) 
-
-# Join UBQ values to all rows
+filter(Gene == "UBQ") %>% # Extract UBQ Cq values for each sample, because UBQ is our reference gene.
+pivot_wider(values_from = Cq, names_from=Gene) # pivot_wider() converts long format → wide format so that each row has a UBQ column.
 rep_dct <- rep %>%
-  filter(Gene != "UBQ") %>%
-  left_join(ubq_values, by = c("PGPR", "Dpi", "Rep")) %>%
-  mutate(DeltaCt = Cq - UBQ)
+  filter(Gene != "UBQ") %>% # Remove UBQ rows (because we only calculate ΔCt for target genes)
+  left_join(ubq_values, by = c("PGPR", "Dpi", "Rep")) %>% # Join UBQ values using PGPR, Dpi, and Rep as matching variables
+  mutate(DeltaCt = Cq - UBQ) # Create a new DeltaCt column: Ct(gene) – Ct(UBQ)
 ```
 
 ## ΔΔCt and fold change
 
 ``` r
-# Step 2: Compute ΔΔCt for each Gene and Dpi, using "Control" treatment as reference
-# Step 3: Calculate ΔΔCt by subtracting the ΔCt of Control at the corresponding Dpi and Gene
-# We'll do this using group_by for Gene and Dpi
-
-# First, extract the Control ΔCt values to use as reference
-control_dct <- filter(rep_dct,PGPR == "Control") %>%  
-pivot_wider(values_from=DeltaCt, names_from=PGPR) %>% 
+control_dct <- filter(rep_dct,PGPR == "Control") %>%  # Extract only the Control samples from the ΔCt table
+pivot_wider(values_from=DeltaCt, names_from=PGPR) %>% # Reshape so that Control ΔCt becomes its own column
+  # values_from = DeltaCt → the ΔCt values for control
+  # names_from = PGPR → column will be named "Control"
 left_join(rep_dct, control_dct, by=c("Gene", "Dpi", "Rep"))
   
+# Calculate ΔΔCt, fold change (FC), and log2FC
 
-# Join the control ΔCt to all rows by Gene, Dpi, and Rep
-#rep_ddct <- rep_dct %>%
-#left_join(control_dct, by = c( "Dpi", "Rep")) %>%
 Relative_expression<-mutate(control_dct, DeltaDeltaCt = DeltaCt - Control) %>% 
 mutate(FC = 2^(-DeltaDeltaCt)) %>% 
   mutate(log2FC=log2(FC))
 Relative_expression<-Relative_expression %>% 
-dplyr::select(PGPR, Gene, Dpi,Rep,log2FC, FC)
+dplyr::select(PGPR, Gene, Dpi,Rep,log2FC, FC) # Select the final columns for output
 ```
 
-\##Calculate mean fold change
+## Mean fold change
 
 ``` r
 summary_df <- Relative_expression %>%
-  group_by(PGPR, Dpi, Gene) %>%
+  group_by(PGPR, Dpi, Gene) %>% # Group by treatment, time point, and gene
   filter(PGPR!="Control") %>% 
   summarise(
-    MeanFC = mean(FC, na.rm = TRUE),
-    Meanlog2FC=mean(log2FC,na.rm = TRUE),
-    SE_FC = sd(FC, na.rm = TRUE) / sqrt(n()), 
-    SE_log2FC=sd(log2FC,na.rm = TRUE) / sqrt(n()), # Standard error
-    .groups = "drop"
+    MeanFC = mean(FC, na.rm = TRUE), # Mean fold change across replicates
+    Meanlog2FC=mean(log2FC,na.rm = TRUE), # Mean log2 fold change
+    SE_FC = sd(FC, na.rm = TRUE) / sqrt(n()), # Standard error of FC
+    SE_log2FC=sd(log2FC,na.rm = TRUE) / sqrt(n()), # S# Standard error of log2FC
+    .groups = "drop" # Ungroup after summarising
   )
 ```
 
@@ -198,14 +186,7 @@ plot_gene_expression <- function(df, gene_subset = NULL,
     geom_hline(yintercept = -1, color = "blue", linetype = "dashed", size = 0.6) +
     # Facet each gene separately
     facet_wrap(~ Gene, scales = "free_x", nrow = 1) +
-    # Grey dividers between Dpi groups (within each treatment)
-    #geom_vline(
-     # xintercept = rep(seq(0.5, num_pgpr - 0.5, by = 1), each = num_dpi - 1) +
-        #rep(seq(1, num_dpi - 1) / num_dpi, times = num_pgpr),
-      #color = "grey80", linewidth = 0.5
-    #) +
-    # Black dividers between PGPR treatments
-    geom_vline(
+        geom_vline(
       xintercept = seq(1.5, num_pgpr - 0.05, by = 1),
       color = "black", linewidth = 0.6
     ) +
@@ -237,6 +218,7 @@ plot_gene_expression <- function(df, gene_subset = NULL,
       axis.text.y = element_text(color = "black", face = "bold", size = 10),
       axis.title.y = element_text(face = "bold", size = 12),
       axis.ticks.x= element_blank(),
+      axis.ticks.y= element_blank(),
       strip.text = element_text(face = "bold", size = 11),
       panel.border = element_rect(color = "black", fill = NA, linewidth = 0.6),
       axis.line = element_line(color = "black"),
@@ -247,8 +229,9 @@ plot_gene_expression <- function(df, gene_subset = NULL,
 }
 ```
 
+### PR1
+
 ``` r
-# Plot for PR1
 PR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("PR1"),
  gene_order = c("PR1"),
@@ -268,6 +251,8 @@ PR1<-plot_gene_expression(df = summary_df,
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
     ## generated.
 
+### PR4
+
 ``` r
 # Plot for PR4
 PR4<-plot_gene_expression(df = summary_df,
@@ -276,6 +261,8 @@ PR4<-plot_gene_expression(df = summary_df,
   pgpr_order = c("P. fluorescens", "S. marcescens", "B. subtilis")
 )
 ```
+
+### PR5
 
 ``` r
 # Plot for PR5
@@ -286,6 +273,8 @@ PR5<-plot_gene_expression(df = summary_df,
 )
 ```
 
+### NPR1
+
 ``` r
 NPR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("NPR1"),
@@ -293,6 +282,8 @@ NPR1<-plot_gene_expression(df = summary_df,
   pgpr_order = c("P. fluorescens", "S. marcescens", "B. subtilis")
 )
 ```
+
+### EDS1
 
 ``` r
 EDS1<-plot_gene_expression(df = summary_df,
@@ -302,6 +293,8 @@ EDS1<-plot_gene_expression(df = summary_df,
 )
 ```
 
+### PAD4
+
 ``` r
 PAD4<-plot_gene_expression(df = summary_df,
   gene_subset = c("PAD4"),
@@ -309,6 +302,8 @@ PAD4<-plot_gene_expression(df = summary_df,
   pgpr_order = c("P. fluorescens", "S. marcescens", "B. subtilis")
 )
 ```
+
+### PDF1.2
 
 ``` r
 PDF1.2<-plot_gene_expression(df = summary_df,
@@ -318,6 +313,8 @@ PDF1.2<-plot_gene_expression(df = summary_df,
 )
 ```
 
+### ICS1
+
 ``` r
 ICS1<-plot_gene_expression(df = summary_df,
   gene_subset = c("ICS1"),
@@ -325,6 +322,8 @@ ICS1<-plot_gene_expression(df = summary_df,
   pgpr_order = c("P. fluorescens", "S. marcescens", "B. subtilis")
 )
 ```
+
+### OPR3
 
 ``` r
 OPR3<-plot_gene_expression(df = summary_df,
@@ -334,6 +333,8 @@ OPR3<-plot_gene_expression(df = summary_df,
 )
 ```
 
+### RdR1
+
 ``` r
 RdR1<-plot_gene_expression(df = summary_df,
   gene_subset = c("RdR1"),
@@ -342,6 +343,8 @@ RdR1<-plot_gene_expression(df = summary_df,
 )
 ```
 
+## SA-based genes
+
 ``` r
 # Blank plots to balance spacing
 blank <- ggplot() + theme_void()
@@ -349,7 +352,7 @@ blank <- ggplot() + theme_void()
 # Left column: ICS1 centered
 left_col <- annotate_figure(
   ggarrange(blank, ICS1, blank,
-            ncol = 1, nrow = 3, heights = c(1, 1.25, 1)),
+            ncol = 1, nrow = 3, heights = c(1, 1.5, 1)),
   top = text_grob("SA biosynthesis", face = "bold", size = 15,color="darkred")
 )
 sa_genes <- c("PR1","PR5","NPR1","EDS1","PAD4","RdR1")
@@ -369,12 +372,14 @@ right_col <- annotate_figure(
 
 # Combine side by side
 SA <- ggarrange(left_col, right_col,
-                    ncol = 2, widths = c(1, 2), common.legend = TRUE)
+                    ncol = 2, widths = c(1, 1.5), common.legend = TRUE)
 
 SA
 ```
 
 ![](Nb_PGPR_Combine_files/figure-gfm/SA_NB-1.png)<!-- -->
+
+## JA/ET-based genes
 
 ``` r
 library(ggpubr)
@@ -394,7 +399,7 @@ library(gridExtra)
 empty <- ggplot() + theme_void()
 
 row1 <- annotate_figure(
-  ggarrange(empty, OPR3, empty, nrow = 3, heights = c(1, 2, 1)),
+  ggarrange(empty, OPR3, empty, nrow = 3, heights = c(1, 2.5, 1)),
   top = text_grob("JA biosynthesis", face = "bold", size = 15,color="darkred")
 )
 ja_genes <- c("PR4","PDF1.2")
@@ -414,9 +419,41 @@ row2 <- annotate_figure(
 # Combine both rows
 JA <- ggarrange(row1, row2,
                     ncol = 2, nrow = 1,
-                    heights = c(1, 1))  # adjust row height if needed
+                    heights = c(2, 1))  # adjust row height if needed
 
 JA
 ```
 
 ![](Nb_PGPR_Combine_files/figure-gfm/JA_Nb-1.png)<!-- -->
+
+## Combined plot
+
+``` r
+### Create a separator plot (a thin horizontal line) to visually divide SA and JA panels
+separator <- ggplot() +
+  geom_hline(yintercept = 0, color = "gray40", linewidth = 0.6) + # Draw a horizontal line at y = 0 to act as the separator
+  theme_void() +
+  coord_cartesian(ylim = c(-1, 1))  ## Expand the coordinate limits vertically so the line is better centered 
+SA <- SA +
+  labs(x = NULL, y = NULL) + # Remove x and y axis labels 
+  theme(axis.title = element_blank()) # Remove axis titles completely from the theme
+
+JA<- JA +
+  labs(x = NULL, y = NULL) +
+  theme(axis.title = element_blank())
+## Combine two plots
+combined_plot <- ggarrange(
+  SA,
+  separator,
+  JA,
+  ncol = 1,
+  labels = c("A","", "B"),
+  align = "v",
+  heights = c(1.3,0.05, 1) # vertically align plots
+)
+
+
+combined_plot
+```
+
+![](Nb_PGPR_Combine_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->

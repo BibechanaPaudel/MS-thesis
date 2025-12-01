@@ -87,9 +87,6 @@ summary_df <- Relative_expression %>%
 ```{r}
 # Function to plot a gene
 
-library(ggplot2)
-library(dplyr)
-
 blue_gradient <- colorRampPalette(c("#7AD3F6", "#163E64"))(4)
 
 plot_gene_expression <- function(df, gene_subset = NULL,
