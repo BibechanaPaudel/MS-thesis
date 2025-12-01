@@ -197,7 +197,7 @@ PVY<-ggarrange(PVY_IL, PVY_SL,    #combine the  figures
                    nrow=1,
                    ncol=2,
                    common.legend=T,    # Gives the common legend for both figures
-                   widths=c(1.25,1))   # Makes the width of 1st fig 1.75 times more than 2nd fig
+                   widths=c(1.25,1))   # Makes the width of 1st fig 1.25 times more than 2nd fig
 PVY
 ```
 
