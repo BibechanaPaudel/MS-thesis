@@ -402,46 +402,55 @@ under the folder named <code>Data/</code>.</p>
 <div id="folder-and-file-structure" class="section level3">
 <h3>Folder and File Structure</h3>
 <ul>
-<li><p><a href="https://github.com/BibechanaPaudel/Reproducibility-project/tree/main/Data">Data</a>:
-Contains .csv files for each of the three biological
-replicates.</p></li>
-<li><p><a href="https://github.com/BibechanaPaudel/Reproducibility-project/blob/main/Nb_PGPR%2BPVY.Rmd">Nb_PGPR+PVY.Rmd</a>:
-The complete R script with code, output, and narrative.</p></li>
-<li><p><a href="https://github.com/BibechanaPaudel/Reproducibility-project/blob/main/Nb_PGPR%2BPVY.html">Nb_PGPR+PVY.html</a>:
-Rendered HTML version of the RMarkdown.</p></li>
-<li><p><a href="https://github.com/BibechanaPaudel/Reproducibility-project/blob/main/Nb_PGPR%2BPVY.md">Nb_PGPR+PVY.md</a>:
-Markdown-exported version for GitHub-friendly viewing.</p></li>
-<li><p><a href="https://github.com/BibechanaPaudel/Reproducibility-project/tree/main/Nb_PGPR%2BPVY_files/figure-gfm">Nb_PGPR+PVY_files/figure-gfm</a>:
-Output plots in high-quality vector format (.png).</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/Data">Data</a>:
+Contains .csv files for each of the three biological replicates, and
+combined dataset of all three biological replicates that are divided
+based on objective.</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/At_Virus">At_Virus</a>:
+Contains the R script, Rmd, HTML file, and a PDF with figures for all
+<em>A. thaliana</em> virus-accumulation experiments.</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/At_PGPR_Virus">At_PGPR_Virus</a>:
+Contains the R script, Rmd, HTML file, and a PDF with figures for all
+<em>A. thaliana</em> virus-accumulation experiments after PGPR
+treatment.</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/At_Gene">At_Gene</a>:
+Contains the R script, Rmd, HTML file, and a PDF with figures for all
+<em>A. thaliana</em> gene expression analysis experiments.</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/Nb_Virus">Nb_Virus</a>:
+Contains the R script, Rmd, HTML file, and a PDF with figures for all
+<em>N. benthamiana</em> virus-accumulation experiments.</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/Nb_PGPR_Virus">Nb_PGPR_Virus</a>:
+Contains the R script, Rmd, HTML file, and a PDF with figures for all
+<em>N. benthamiana</em> virus-accumulation experiments after PGPR
+treatment.</p></li>
+<li><p><a href="https://github.com/BibechanaPaudel/MS-thesis/tree/main/Nb_Gene">Nb_Gene</a>:
+Contains the R script, Rmd, HTML file, and a PDF with figures for all
+<em>N. benthamiana</em> gene expression analysis experiments.</p></li>
 </ul>
-</div>
-<div id="project-overview" class="section level3">
-<h3>Project Overview</h3>
-<p><strong>Objective:</strong><br />
-To evaluate whether PGPR treatments mitigate PVY accumulation, based on
-qPCR-derived Cq values, analyzed over time (Dpi) in both inoculated and
-systemic leaf tissues of <em>N. benthamiana</em>.</p>
-<p><strong>Treatments:</strong> - Control<br />
-- <em>Pseudomonas fluorescens</em><br />
-- <em>Serratia marcescens</em><br />
-- <em>Bacillus amyloliquefaciens</em><br />
-- <em>Bacillus subtilis</em></p>
 </div>
 <div id="script-workflow" class="section level3">
 <h3>Script workflow</h3>
 <div id="data-import-and-preparation" class="section level4">
 <h4><strong>1. Data Import and Preparation</strong></h4>
 <ul>
-<li>Three biological replicate datasets (<code>.csv</code>) are stored
-in the <code>Data/</code> folder.</li>
-<li>All data are processed in a single RMarkdown (<code>.Rmd</code>)
-script.</li>
-<li>Each file contains Cq values from RT-qPCR for PVY quantification,
-along with metadata (Treatment, Dpi, Technical Replicate).</li>
+<li>The <code>Data/</code> folder contains three biological replicate
+(<code>.csv</code>) files, organized as Obj1, Obj2, and Obj3 for each
+objective. A separate combined file is also included, where each
+replicate represents the technical replicates within the three
+biological replicates.</li>
+<li>All data are processed in a different RMarkdown (<code>.Rmd</code>)
+script based on the host plant and experiment objective.</li>
+<li>Each file contains Cq values from RT-qPCR for virus quantification
+or gene expression analysis, along with metadata (Treatment, Dpi,
+Technical Replicate). The dataset includes a column Gene, which
+identifies each gene being tested.</li>
 <li>Viral load is calculated from Cq values using the regression
-equation <strong>Y= −3.93X+49.153</strong>, where Y= Cq value and X=
-copy number of virus from <a href="https://academic.oup.com/abbs/article/38/10/669/217">Feng, J.L et
-al., 2006</a>, then log-transformed for normality.</li>
+equation <strong>Y= −3.93X+49.153</strong> for PVY and <strong>Y =
+–3.353X + 37.416</strong> for CMV, where Y= Cq value and X= copy number
+of virus from <a href="https://academic.oup.com/abbs/article/38/10/669/217">Feng, J.L et
+al., (2006)</a>, then log-transformed for normality.</li>
+<li>Gene expression is calculated using 2^(-ΔΔCq)<a href="https://pubmed.ncbi.nlm.nih.gov/30654913/">Taylor et al.,
+(2019)</a></li>
 </ul>
 </div>
 <div id="data-grouping-and-statistical-analysis" class="section level4">
@@ -449,33 +458,16 @@ al., 2006</a>, then log-transformed for normality.</li>
 <ul>
 <li>Data are grouped by Treatment, Days post-inoculation (Dpi), and
 Technical Replicates.</li>
-<li>A linear model is fit to the log-transformed viral load to analyze
-interaction effects.</li>
-<li>ANOVA (type-II via car::Anova) is used to test for significant
-Treatment × Dpi interactions.</li>
-<li>Estimated marginal means are calculated using <code>emmeans</code>,
-followed by Tukey-adjusted pairwise comparisons.</li>
-<li>Significance letters (e.g., a, b, c) are generated using
-<code>multcompView</code>.</li>
-<li>Significance groupings (letters) are extracted for
-visualisation.</li>
-</ul>
-</div>
-<div id="visualisation" class="section level4">
-<h4><strong>3. Visualisation</strong></h4>
-<ul>
-<li>Bar plots are generated for:
-<ul>
-<li><strong>Inoculated leaves</strong> at 1, 4, 7, and 10 Dpi</li>
-<li><strong>Systemic leaves</strong> at 7 and 10 Dpi</li>
-</ul></li>
-<li>Visuals include:
-<ul>
-<li>Grouped bar charts with error bars (standard error)</li>
-<li>Statistical significance labels over bars</li>
-<li>Combined plots with shared legends</li>
-</ul></li>
-<li>Color-blind friendly palettes are used.</li>
+<li>For virus-accumulation after PGPR treatment, log-transformed viral
+load is analyzed separately at each Dpi:</li>
+<li>For each Dpi, a one-way ANOVA is fit using aov(logViralLoad ~
+Treatment).</li>
+<li>Fisher’s LSD test is performed with agricolae::LSD.test (α = 0.05,
+p.adj = “none”) to compare Treatment means.</li>
+<li>Significance letters (e.g., a, b, c) are extracted from lsd$groups
+and used for visualization.</li>
+<li>For gene expression analysis, genes with |Log2(FC)∣&gt;1 are
+considered biologically significant.</li>
 </ul>
 </div>
 </div>
@@ -495,26 +487,126 @@ script.</p>
 </div>
 <div id="file-tree" class="section level3">
 <h3>File Tree</h3>
-<pre><code>├── Data
-│   ├── Nb_PGPR+PVY_1st_Reproducibility.csv   ## Data from first biological replication
-│   ├── Nb_PGPR+PVY_2nd_Reproducibility.csv   ## Data from second biological replication
-│   └── Nb_PGPR+PVY_3rd_Reproducibility.csv   ## Data from third biological replication
-├── Nb_PGPR+PVY.html   ##script in html format
-├── Nb_PGPR+PVY.md     ##script in github favoured markdowm format
-├── Nb_PGPR+PVY.Rmd    ##script in rmd format
-├── Nb_PGPR+PVY_files
-│   └── figure-gfm
-│       ├── Combine fig 1st trial-1.png  ## combine fig from 1st biological replication
-│       ├── Combine fig 2nd trial-1.png  ## combine fig from 2nd biological replication
-│       ├── Combine fig 3rd trial-1.png  ## combine fig from 3rd biological replication
-│       ├── PVY on IL_1st trial_NB-1.png 
-│       ├── PVY on IL_2nd trial_NB-1.png
-│       ├── PVY on IL_3rd trial_NB-1.png
-│       ├── PVY on SL_1st trial_NB-1.png
-│       ├── PVY on SL_2ndtrial_NB-1.png
-│       └── PVY on SL_3rdtrial_NB-1.png
-├── README.md 
-└── Reproducibility-project.Rproj</code></pre>
+<pre><code>├── At_Gene
+│   ├── At_PGPR_CMV_Gene.html
+│   ├── At_PGPR_CMV_Gene.Rmd
+│   ├── At_PGPR_Combine.html
+│   ├── At_PGPR_Combine.pdf
+│   └── At_PGPR_Combine.Rmd
+├── At_PGPR_Virus
+│   ├── At_PGPR_CMV.html
+│   ├── At_PGPR_CMV.pdf
+│   ├── At_PGPR_CMV.Rmd
+│   ├── At_PGPR_CMV_Combine.pdf
+│   ├── At_PGPR_PVY.html
+│   ├── At_PGPR_PVY.pdf
+│   ├── At_PGPR_PVY.Rmd
+│   └── At_PGPR_PVY_files
+│       └── figure-html
+├── At_Virus
+│   ├── At_CMV.html
+│   ├── At_CMV.Rmd
+│   ├── At_CMV_CP.pdf
+│   ├── At_CMV_RNA3.pdf
+│   ├── At_PVY.html
+│   ├── At_PVY.Rmd
+│   ├── At_PVY_PVY1.pdf
+│   └── At_PVY_PVY3.pdf
+├── CMV_RNA3_combine_paper.pdf
+├── Data
+│   ├── Obj1
+│   │   ├── At_CMV_1st_CP_1ng.csv
+│   │   ├── At_CMV_1st_RNA3_1ng.csv
+│   │   ├── At_CMV_2nd_CP_1ng.csv
+│   │   ├── At_CMV_2nd_RNA3_1ng.csv
+│   │   ├── At_PVY_1st_PVY1_10ng.csv
+│   │   ├── At_PVY_1st_PVY3_10ng.csv
+│   │   ├── At_PVY_2nd_PVY1_10ng.csv
+│   │   ├── At_PVY_2nd_PVY3_10ng.csv
+│   │   ├── Nb_CMV_1st_CP_10ng.csv
+│   │   ├── Nb_CMV_1st_CP_1ng.csv
+│   │   ├── Nb_CMV_1st_RNA3_10ng.csv
+│   │   ├── Nb_CMV_1st_RNA3_1ng.csv
+│   │   ├── Nb_CMV_2nd_CP_1ng.csv
+│   │   ├── Nb_CMV_2nd_RNA3_1ng.csv
+│   │   ├── Nb_PVY_1st_PVY1_10ng.csv
+│   │   ├── Nb_PVY_1st_PVY1_1ng.csv
+│   │   ├── Nb_PVY_1st_PVY1_1ng.xlsx
+│   │   ├── Nb_PVY_1st_PVY3_10ng.csv
+│   │   ├── Nb_PVY_1st_PVY3_1ng.csv
+│   │   ├── Nb_PVY_2nd_PVY1_10ng.csv
+│   │   └── Nb_PVY_2nd_PVY3_10ng.csv
+│   ├── Obj2
+│   │   ├── At_PGPR_1st_trial.csv
+│   │   ├── At_PGPR_2nd_trial.csv
+│   │   ├── At_PGPR_3rd_trial.csv
+│   │   ├── At_PGPR_CMV_Gene_1st_trial.csv
+│   │   ├── At_PGPR_CMV_Gene_2nd_trial.csv
+│   │   ├── At_PGPR_CMV_Gene_3rd_trial.csv
+│   │   ├── At_PGPR_CMV_Gene_Combine.csv
+│   │   ├── At_PGPR_Combine.csv
+│   │   ├── Nb_PGPR_1st_trial.csv
+│   │   ├── Nb_PGPR_2nd_trial.csv
+│   │   ├── Nb_PGPR_3rd_trial.csv
+│   │   ├── Nb_PGPR_CMV_Gene_1st_trial.csv
+│   │   ├── Nb_PGPR_CMV_Gene_2nd_trial.csv
+│   │   ├── Nb_PGPR_CMV_Gene_3rd_trial.csv
+│   │   ├── Nb_PGPR_CMV_Gene_Combine.csv
+│   │   └── Nb_PGPR_Combine.csv
+│   └── Obj3
+│       ├── At_PGPR_CMV_1st_trial_New.csv
+│       ├── At_PGPR_CMV_2nd_trial_New.csv
+│       ├── At_PGPR_CMV_3rd_trial_New.csv
+│       ├── At_PGPR_CMV_Combine.csv
+│       ├── At_PGPR_PVY_1st_trial_New.csv
+│       ├── At_PGPR_PVY_2nd_trial_New.csv
+│       ├── At_PGPR_PVY_3rd_trial_New.csv
+│       ├── At_PGPR_PVY_Combine.csv
+│       ├── Nb_PGPR_CMV_1st_trial_New.csv
+│       ├── Nb_PGPR_CMV_2nd_trial_New.csv
+│       ├── Nb_PGPR_CMV_3rd_trial_New.csv
+│       ├── Nb_PGPR_CMV_Combine.csv
+│       ├── Nb_PGPR_PVY_1st_trial_New.csv
+│       ├── Nb_PGPR_PVY_2nd_trial_New.csv
+│       ├── Nb_PGPR_PVY_3rd_trial_New.csv
+│       └── NB_PGPR_PVY_Combine.csv
+├── MS-thesis.Rproj
+├── Nb_Gene
+│   ├── NB_PGPR_CMV_Combine.pdf
+│   ├── Nb_PGPR_CMV_Gene.html
+│   ├── Nb_PGPR_CMV_Gene.Rmd
+│   ├── Nb_PGPR_Combine.html
+│   ├── Nb_PGPR_Combine.md
+│   ├── NB_PGPR_Combine.pdf
+│   ├── Nb_PGPR_Combine.Rmd
+│   └── Nb_PGPR_Combine_files
+│       └── figure-gfm
+│           ├── JA_Nb-1.png
+│           ├── SA_NB-1.png
+│           └── unnamed-chunk-8-1.png
+├── Nb_PGPR_Virus
+│   ├── NB_PGPR_CMV.html
+│   ├── NB_PGPR_CMV.pdf
+│   ├── NB_PGPR_CMV.Rmd
+│   ├── Nb_PGPR_PVY.html
+│   ├── NB_PGPR_PVY.pdf
+│   ├── Nb_PGPR_PVY.Rmd
+│   └── Nb_PGPR_PVY_files
+│       └── figure-html
+├── Nb_PVY.Rmd
+├── Nb_Virus
+│   ├── Nb_CMV.html
+│   ├── Nb_CMV.Rmd
+│   ├── NB_CMV_CP.pdf
+│   ├── NB_CMV_RNA3.pdf
+│   ├── NB_CMV_RNA3.png
+│   ├── Nb_PVY.html
+│   ├── Nb_PVY.Rmd
+│   ├── NB_PVY_PVY1.pdf
+│   └── Nb_PVY_PVY3.pdf
+├── PVY_PVY3_Combine_Paper.pdf
+├── README.html
+└── README.md</code></pre>
 </div>
 </div>
 
