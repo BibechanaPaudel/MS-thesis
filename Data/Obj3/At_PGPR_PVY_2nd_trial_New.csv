@@ -1,0 +1,85 @@
+Treatment,Dpi,Rep,Cq
+P. fluorescens,IL-1,1,20.53
+P. fluorescens,IL-1,2,20.3
+P. fluorescens,IL-1,3,20.83
+S. marcescens,IL-1,1,20.36
+S. marcescens,IL-1,2,20.15
+S. marcescens,IL-1,3,20.27
+B. subtilis,IL-1,1,19.55
+B. subtilis,IL-1,2,19.78
+B. subtilis,IL-1,3,20.08
+Control,IL-1,1,18.51
+Control,IL-1,2,18.76
+Control,IL-1,3,18.92
+P. fluorescens,IL-4,1,20.43
+P. fluorescens,IL-4,2,21.16
+P. fluorescens,IL-4,3,20.96
+S. marcescens,IL-4,1,22.66
+S. marcescens,IL-4,2,23.02
+S. marcescens,IL-4,3,23.02
+B. subtilis,IL-4,1,20.22
+B. subtilis,IL-4,2,20.23
+B. subtilis,IL-4,3,20.4
+Control,IL-4,1,19.48
+Control,IL-4,2,19.7
+Control,IL-4,3,19.52
+P. fluorescens,IL-7,1,24.41
+P. fluorescens,IL-7,2,24.38
+P. fluorescens,IL-7,3,24.4
+S. marcescens,IL-7,1,20.19
+S. marcescens,IL-7,2,20.32
+S. marcescens,IL-7,3,20.62
+B. subtilis,IL-7,1,21.34
+B. subtilis,IL-7,2,21.31
+B. subtilis,IL-7,3,21.44
+Control,IL-7,1,20.71
+Control,IL-7,2,20.51
+Control,IL-7,3,20.62
+P. fluorescens,IL-10,1,22.31
+P. fluorescens,IL-10,2,22.5
+P. fluorescens,IL-10,3,22.48
+S. marcescens,IL-10,1,24.02
+S. marcescens,IL-10,2,23.89
+S. marcescens,IL-10,3,23.8
+B. subtilis,IL-10,1,23.5
+B. subtilis,IL-10,2,24.01
+B. subtilis,IL-10,3,23.81
+Control,IL-10,1,23.7
+Control,IL-10,2,24.12
+Control,IL-10,3,24.21
+P. fluorescens,SL-7,1,32.37
+P. fluorescens,SL-7,2,33.75
+P. fluorescens,SL-7,3,32.68
+S. marcescens,SL-7,1,29.53
+S. marcescens,SL-7,2,31.77
+S. marcescens,SL-7,3,30.84
+B. subtilis,SL-7,1,31.16
+B. subtilis,SL-7,2,30.32
+B. subtilis,SL-7,3,30.42
+Control,SL-7,1,30.75
+Control,SL-7,2,30.62
+Control,SL-7,3,30.83
+P. fluorescens,SL-10,1,32.36
+P. fluorescens,SL-10,2,33.17
+P. fluorescens,SL-10,3,33.09
+S. marcescens,SL-10,1,32.85
+S. marcescens,SL-10,2,32.13
+S. marcescens,SL-10,3,32.27
+B. subtilis,SL-10,1,33.22
+B. subtilis,SL-10,2,32.82
+B. subtilis,SL-10,3,32.27
+Control,SL-10,1,19.97
+Control,SL-10,2,19.51
+Control,SL-10,3,20.24
+P. fluorescens,SL-14,1,33.79
+P. fluorescens,SL-14,2,33.32
+P. fluorescens,SL-14,3,32.71
+S. marcescens,SL-14,1,32.44
+S. marcescens,SL-14,2,32.57
+S. marcescens,SL-14,3,32.32
+B. subtilis,SL-14,1,34.19
+B. subtilis,SL-14,2,32.93
+B. subtilis,SL-14,3,32.78
+Control,SL-14,1,32.58
+Control,SL-14,2,31.88
+Control,SL-14,3,31.90

@@ -1,0 +1,433 @@
+PGPR,Dpi,Gene,Rep,Cq
+P. fluorescens,1,PR1,1,20.87
+P. fluorescens,1,PR1,2,20.81
+P. fluorescens,1,PR1,3,21.05
+P. fluorescens,1,PR4,1,26.68
+P. fluorescens,1,PR4,2,26.85
+P. fluorescens,1,PR4,3,27
+P. fluorescens,1,PR5,1,21.1
+P. fluorescens,1,PR5,2,21.25
+P. fluorescens,1,PR5,3,21.13
+P. fluorescens,1,UBQ,1,24.12
+P. fluorescens,1,UBQ,2,24.22
+P. fluorescens,1,UBQ,3,24.08
+P. fluorescens,4,PR1,1,26.2
+P. fluorescens,4,PR1,2,25.87
+P. fluorescens,4,PR1,3,26.04
+P. fluorescens,4,PR4,1,28.6
+P. fluorescens,4,PR4,2,28.49
+P. fluorescens,4,PR4,3,28.53
+P. fluorescens,4,PR5,1,22.11
+P. fluorescens,4,PR5,2,22.16
+P. fluorescens,4,PR5,3,22.17
+P. fluorescens,4,UBQ,1,24.45
+P. fluorescens,4,UBQ,2,24.51
+P. fluorescens,4,UBQ,3,24.53
+P. fluorescens,7,PR1,1,25.72
+P. fluorescens,7,PR1,2,25.81
+P. fluorescens,7,PR1,3,25.69
+P. fluorescens,7,PR4,1,28.4
+P. fluorescens,7,PR4,2,28.32
+P. fluorescens,7,PR4,3,28.49
+P. fluorescens,7,PR5,1,21.43
+P. fluorescens,7,PR5,2,21.27
+P. fluorescens,7,PR5,3,21.29
+P. fluorescens,7,UBQ,1,24.37
+P. fluorescens,7,UBQ,2,24.46
+P. fluorescens,7,UBQ,3,24.37
+S. marcescens,1,PR1,1,26.49
+S. marcescens,1,PR1,2,26.44
+S. marcescens,1,PR1,3,26.34
+S. marcescens,1,PR4,1,28.1
+S. marcescens,1,PR4,2,27.56
+S. marcescens,1,PR4,3,27.97
+S. marcescens,1,PR5,1,23.08
+S. marcescens,1,PR5,2,23.14
+S. marcescens,1,PR5,3,23.09
+S. marcescens,1,UBQ,1,24.25
+S. marcescens,1,UBQ,2,24.21
+S. marcescens,1,UBQ,3,24.3
+S. marcescens,4,PR1,1,26.26
+S. marcescens,4,PR1,2,26.35
+S. marcescens,4,PR1,3,26.39
+S. marcescens,4,PR4,1,28.17
+S. marcescens,4,PR4,2,28.28
+S. marcescens,4,PR4,3,28.37
+S. marcescens,4,PR5,1,22.09
+S. marcescens,4,PR5,2,22.37
+S. marcescens,4,PR5,3,22.17
+S. marcescens,4,UBQ,1,24.85
+S. marcescens,4,UBQ,2,24.69
+S. marcescens,4,UBQ,3,24.57
+S. marcescens,7,PR1,1,25.99
+S. marcescens,7,PR1,2,26.05
+S. marcescens,7,PR1,3,26.07
+S. marcescens,7,PR4,1,27.69
+S. marcescens,7,PR4,2,27.46
+S. marcescens,7,PR4,3,27.92
+S. marcescens,7,PR5,1,21.26
+S. marcescens,7,PR5,2,21.15
+S. marcescens,7,PR5,3,21.13
+S. marcescens,7,UBQ,1,24.06
+S. marcescens,7,UBQ,2,24.21
+S. marcescens,7,UBQ,3,24.21
+B. subtilis,1,PR1,1,26.57
+B. subtilis,1,PR1,2,26.75
+B. subtilis,1,PR1,3,26.57
+B. subtilis,1,PR4,1,27.78
+B. subtilis,1,PR4,2,27.6
+B. subtilis,1,PR4,3,27.83
+B. subtilis,1,PR5,1,22.4
+B. subtilis,1,PR5,2,22.43
+B. subtilis,1,PR5,3,22.42
+B. subtilis,1,UBQ,1,24.24
+B. subtilis,1,UBQ,2,24.32
+B. subtilis,1,UBQ,3,24.28
+B. subtilis,4,PR1,1,25.53
+B. subtilis,4,PR1,2,25.53
+B. subtilis,4,PR1,3,25.36
+B. subtilis,4,PR4,1,27.84
+B. subtilis,4,PR4,2,27.68
+B. subtilis,4,PR4,3,27.6
+B. subtilis,4,PR5,1,21.97
+B. subtilis,4,PR5,2,22.05
+B. subtilis,4,PR5,3,21.98
+B. subtilis,4,UBQ,1,23.88
+B. subtilis,4,UBQ,2,23.97
+B. subtilis,4,UBQ,3,23.95
+B. subtilis,7,PR1,1,25.85
+B. subtilis,7,PR1,2,25.58
+B. subtilis,7,PR1,3,25.63
+B. subtilis,7,PR4,1,27.43
+B. subtilis,7,PR4,2,28.12
+B. subtilis,7,PR4,3,27.72
+B. subtilis,7,PR5,1,20.84
+B. subtilis,7,PR5,2,20.95
+B. subtilis,7,PR5,3,21.05
+B. subtilis,7,UBQ,1,23.77
+B. subtilis,7,UBQ,2,23.85
+B. subtilis,7,UBQ,3,23.65
+Control,1,PR1,1,24.59
+Control,1,PR1,2,24.61
+Control,1,PR1,3,24.51
+Control,1,PR4,1,26.87
+Control,1,PR4,2,27.63
+Control,1,PR4,3,27.34
+Control,1,PR5,1,22.53
+Control,1,PR5,2,22.43
+Control,1,PR5,3,22.31
+Control,1,UBQ,1,24.11
+Control,1,UBQ,2,24.16
+Control,1,UBQ,3,24.22
+Control,4,PR1,1,26.06
+Control,4,PR1,2,25.95
+Control,4,PR1,3,25.89
+Control,4,PR4,1,27.31
+Control,4,PR4,2,27.29
+Control,4,PR4,3,26.82
+Control,4,PR5,1,21.65
+Control,4,PR5,2,21.69
+Control,4,PR5,3,21.82
+Control,4,UBQ,1,24.02
+Control,4,UBQ,2,24.14
+Control,4,UBQ,3,24.11
+Control,7,PR1,1,25.08
+Control,7,PR1,2,25.15
+Control,7,PR1,3,25.01
+Control,7,PR4,1,27.02
+Control,7,PR4,2,26.49
+Control,7,PR4,3,27.07
+Control,7,PR5,1,21.4
+Control,7,PR5,2,21.42
+Control,7,PR5,3,21.39
+Control,7,UBQ,1,23.78
+Control,7,UBQ,2,23.74
+Control,7,UBQ,3,23.78
+P. fluorescens,1,NPR1,1,22.8
+P. fluorescens,1,NPR1,2,22.87
+P. fluorescens,1,NPR1,3,22.9
+P. fluorescens,1,EDS1,1,21.43
+P. fluorescens,1,EDS1,2,21.38
+P. fluorescens,1,EDS1,3,21.42
+P. fluorescens,1,PAD4,1,22.92
+P. fluorescens,1,PAD4,2,22.91
+P. fluorescens,1,PAD4,3,22.82
+P. fluorescens,1,PDF1.2,1,22.05
+P. fluorescens,1,PDF1.2,2,22.14
+P. fluorescens,1,PDF1.2,3,22.05
+P. fluorescens,4,NPR1,1,23.45
+P. fluorescens,4,NPR1,2,23.33
+P. fluorescens,4,NPR1,3,23.48
+P. fluorescens,4,EDS1,1,22.64
+P. fluorescens,4,EDS1,2,22.65
+P. fluorescens,4,EDS1,3,22.79
+P. fluorescens,4,PAD4,1,25.48
+P. fluorescens,4,PAD4,2,25.24
+P. fluorescens,4,PAD4,3,25.28
+P. fluorescens,4,PDF1.2,1,24.46
+P. fluorescens,4,PDF1.2,2,24.58
+P. fluorescens,4,PDF1.2,3,25.23
+P. fluorescens,7,NPR1,1,23.38
+P. fluorescens,7,NPR1,2,23.3
+P. fluorescens,7,NPR1,3,23.28
+P. fluorescens,7,EDS1,1,22.67
+P. fluorescens,7,EDS1,2,22.54
+P. fluorescens,7,EDS1,3,22.52
+P. fluorescens,7,PAD4,1,25.03
+P. fluorescens,7,PAD4,2,24.9
+P. fluorescens,7,PAD4,3,25.03
+P. fluorescens,7,PDF1.2,1,24.02
+P. fluorescens,7,PDF1.2,2,23.86
+P. fluorescens,7,PDF1.2,3,24.07
+S. marcescens,1,NPR1,1,23.23
+S. marcescens,1,NPR1,2,23.21
+S. marcescens,1,NPR1,3,23.06
+S. marcescens,1,EDS1,1,22.45
+S. marcescens,1,EDS1,2,22.49
+S. marcescens,1,EDS1,3,22.43
+S. marcescens,1,PAD4,1,24.93
+S. marcescens,1,PAD4,2,24.97
+S. marcescens,1,PAD4,3,24.99
+S. marcescens,1,PDF1.2,1,24.5
+S. marcescens,1,PDF1.2,2,24.56
+S. marcescens,1,PDF1.2,3,24.62
+S. marcescens,4,NPR1,1,23.72
+S. marcescens,4,NPR1,2,23.67
+S. marcescens,4,NPR1,3,23.7
+S. marcescens,4,EDS1,1,23.16
+S. marcescens,4,EDS1,2,23.26
+S. marcescens,4,EDS1,3,23.08
+S. marcescens,4,PAD4,1,25.99
+S. marcescens,4,PAD4,2,25.95
+S. marcescens,4,PAD4,3,26.06
+S. marcescens,4,PDF1.2,1,24.56
+S. marcescens,4,PDF1.2,2,24.27
+S. marcescens,4,PDF1.2,3,24.17
+S. marcescens,7,NPR1,1,23.32
+S. marcescens,7,NPR1,2,23.46
+S. marcescens,7,NPR1,3,23.49
+S. marcescens,7,EDS1,1,23.04
+S. marcescens,7,EDS1,2,23.13
+S. marcescens,7,EDS1,3,23.11
+S. marcescens,7,PAD4,1,25.56
+S. marcescens,7,PAD4,2,25.67
+S. marcescens,7,PAD4,3,25.48
+S. marcescens,7,PDF1.2,1,24.85
+S. marcescens,7,PDF1.2,2,24.29
+S. marcescens,7,PDF1.2,3,24.14
+B. subtilis,1,NPR1,1,23.75
+B. subtilis,1,NPR1,2,23.76
+B. subtilis,1,NPR1,3,23.75
+B. subtilis,1,EDS1,1,23.3
+B. subtilis,1,EDS1,2,23.15
+B. subtilis,1,EDS1,3,23.15
+B. subtilis,1,PAD4,1,25.59
+B. subtilis,1,PAD4,2,25.55
+B. subtilis,1,PAD4,3,25.45
+B. subtilis,1,PDF1.2,1,25.04
+B. subtilis,1,PDF1.2,2,25.14
+B. subtilis,1,PDF1.2,3,25.14
+B. subtilis,4,NPR1,1,23.22
+B. subtilis,4,NPR1,2,23.13
+B. subtilis,4,NPR1,3,23.17
+B. subtilis,4,EDS1,1,22.81
+B. subtilis,4,EDS1,2,22.63
+B. subtilis,4,EDS1,3,22.61
+B. subtilis,4,PAD4,1,25.37
+B. subtilis,4,PAD4,2,25.3
+B. subtilis,4,PAD4,3,25.43
+B. subtilis,4,PDF1.2,1,24.55
+B. subtilis,4,PDF1.2,2,24.57
+B. subtilis,4,PDF1.2,3,24.52
+B. subtilis,7,NPR1,1,23.25
+B. subtilis,7,NPR1,2,23.2
+B. subtilis,7,NPR1,3,23.06
+B. subtilis,7,EDS1,1,22.61
+B. subtilis,7,EDS1,2,22.42
+B. subtilis,7,EDS1,3,22.57
+B. subtilis,7,PAD4,1,24.86
+B. subtilis,7,PAD4,2,25
+B. subtilis,7,PAD4,3,24.97
+B. subtilis,7,PDF1.2,1,24.05
+B. subtilis,7,PDF1.2,2,24.13
+B. subtilis,7,PDF1.2,3,24.27
+Control,1,NPR1,1,23.38
+Control,1,NPR1,2,23.3
+Control,1,NPR1,3,23.23
+Control,1,EDS1,1,22.55
+Control,1,EDS1,2,22.5
+Control,1,EDS1,3,22.57
+Control,1,PAD4,1,25.04
+Control,1,PAD4,2,25.02
+Control,1,PAD4,3,24.71
+Control,1,PDF1.2,1,24.74
+Control,1,PDF1.2,2,24.82
+Control,1,PDF1.2,3,24.89
+Control,4,NPR1,1,23.47
+Control,4,NPR1,2,23.46
+Control,4,NPR1,3,23.39
+Control,4,EDS1,1,22.81
+Control,4,EDS1,2,22.97
+Control,4,EDS1,3,23.05
+Control,4,PAD4,1,25.48
+Control,4,PAD4,2,25.47
+Control,4,PAD4,3,25.39
+Control,4,PDF1.2,1,24.52
+Control,4,PDF1.2,2,24.52
+Control,4,PDF1.2,3,24.42
+Control,7,NPR1,1,23.19
+Control,7,NPR1,2,23.12
+Control,7,NPR1,3,24.1
+Control,7,EDS1,1,22.28
+Control,7,EDS1,2,22.4
+Control,7,EDS1,3,22.46
+Control,7,PAD4,1,24.78
+Control,7,PAD4,2,24.9
+Control,7,PAD4,3,24.77
+Control,7,PDF1.2,1,24.89
+Control,7,PDF1.2,2,26.24
+Control,7,PDF1.2,3,26.38
+P. fluorescens,1,OPR3,1,34.89
+P. fluorescens,1,OPR3,2,34.39
+P. fluorescens,1,OPR3,3,34.96
+P. fluorescens,1,ICS1,1,21.16
+P. fluorescens,1,ICS1,2,21.3
+P. fluorescens,1,ICS1,3,21.29
+P. fluorescens,1,RdR1,1,23.9
+P. fluorescens,1,RdR1,2,23.95
+P. fluorescens,1,RdR1,3,24.04
+P. fluorescens,1,Thi2.1,1,31.24
+P. fluorescens,1,Thi2.1,2,30.84
+P. fluorescens,1,Thi2.1,3,30.89
+P. fluorescens,4,OPR3,1,35.73
+P. fluorescens,4,OPR3,2,34.5
+P. fluorescens,4,OPR3,3,34.94
+P. fluorescens,4,ICS1,1,23.76
+P. fluorescens,4,ICS1,2,23.74
+P. fluorescens,4,ICS1,3,23.76
+P. fluorescens,4,RdR1,1,24.27
+P. fluorescens,4,RdR1,2,24.15
+P. fluorescens,4,RdR1,3,24.48
+P. fluorescens,4,Thi2.1,1,34.42
+P. fluorescens,4,Thi2.1,2,33.76
+P. fluorescens,4,Thi2.1,3,35.34
+P. fluorescens,7,OPR3,1,36.52
+P. fluorescens,7,OPR3,2,35.26
+P. fluorescens,7,OPR3,3,34.9
+P. fluorescens,7,ICS1,1,24.17
+P. fluorescens,7,ICS1,2,24.07
+P. fluorescens,7,ICS1,3,24.07
+P. fluorescens,7,RdR1,1,24.14
+P. fluorescens,7,RdR1,2,24.05
+P. fluorescens,7,RdR1,3,24.15
+P. fluorescens,7,Thi2.1,1,36.48
+P. fluorescens,7,Thi2.1,2,33.85
+P. fluorescens,7,Thi2.1,3,34.29
+S. marcescens,1,OPR3,1,35.38
+S. marcescens,1,OPR3,2,35.43
+S. marcescens,1,OPR3,3,35.05
+S. marcescens,1,ICS1,1,23.89
+S. marcescens,1,ICS1,2,23.72
+S. marcescens,1,ICS1,3,23.83
+S. marcescens,1,RdR1,1,24.82
+S. marcescens,1,RdR1,2,23.78
+S. marcescens,1,RdR1,3,23.7
+S. marcescens,1,Thi2.1,1,36.52
+S. marcescens,1,Thi2.1,2,34.59
+S. marcescens,1,Thi2.1,3,35.18
+S. marcescens,4,OPR3,1,34.29
+S. marcescens,4,OPR3,2,35.56
+S. marcescens,4,OPR3,3,35.49
+S. marcescens,4,ICS1,1,24.1
+S. marcescens,4,ICS1,2,24.22
+S. marcescens,4,ICS1,3,24.14
+S. marcescens,4,RdR1,1,24.48
+S. marcescens,4,RdR1,2,24.37
+S. marcescens,4,RdR1,3,24.33
+S. marcescens,4,Thi2.1,1,33.85
+S. marcescens,4,Thi2.1,2,33.93
+S. marcescens,4,Thi2.1,3,33.16
+S. marcescens,7,OPR3,1,34.68
+S. marcescens,7,OPR3,2,35.62
+S. marcescens,7,OPR3,3,35.62
+S. marcescens,7,ICS1,1,23.57
+S. marcescens,7,ICS1,2,23.73
+S. marcescens,7,ICS1,3,23.88
+S. marcescens,7,RdR1,1,24.08
+S. marcescens,7,RdR1,2,24.21
+S. marcescens,7,RdR1,3,24.17
+S. marcescens,7,Thi2.1,1,37.2
+S. marcescens,7,Thi2.1,2,37.3
+S. marcescens,7,Thi2.1,3,34.27
+B. subtilis,1,OPR3,1,33.29
+B. subtilis,1,OPR3,2,33.92
+B. subtilis,1,OPR3,3,34.43
+B. subtilis,1,ICS1,1,25.18
+B. subtilis,1,ICS1,2,24.08
+B. subtilis,1,ICS1,3,24.14
+B. subtilis,1,RdR1,1,24.04
+B. subtilis,1,RdR1,2,23.95
+B. subtilis,1,RdR1,3,24.03
+B. subtilis,1,Thi2.1,1,34.05
+B. subtilis,1,Thi2.1,2,32.93
+B. subtilis,1,Thi2.1,3,34.31
+B. subtilis,4,OPR3,1,34.67
+B. subtilis,4,OPR3,2,36.09
+B. subtilis,4,OPR3,3,35.12
+B. subtilis,4,ICS1,1,23.33
+B. subtilis,4,ICS1,2,23.32
+B. subtilis,4,ICS1,3,23.6
+B. subtilis,4,RdR1,1,24.11
+B. subtilis,4,RdR1,2,24.03
+B. subtilis,4,RdR1,3,24.12
+B. subtilis,4,Thi2.1,1,35.43
+B. subtilis,4,Thi2.1,2,35.09
+B. subtilis,4,Thi2.1,3,35.43
+B. subtilis,7,OPR3,1,34.28
+B. subtilis,7,OPR3,2,35.59
+B. subtilis,7,OPR3,3,33.91
+B. subtilis,7,ICS1,1,23.69
+B. subtilis,7,ICS1,2,23.64
+B. subtilis,7,ICS1,3,24.07
+B. subtilis,7,RdR1,1,23.77
+B. subtilis,7,RdR1,2,23.72
+B. subtilis,7,RdR1,3,23.69
+B. subtilis,7,Thi2.1,1,35.6
+B. subtilis,7,Thi2.1,2,35.99
+B. subtilis,7,Thi2.1,3,34.7
+Control,1,OPR3,1,35.2
+Control,1,OPR3,2,35.6
+Control,1,OPR3,3,34.14
+Control,1,ICS1,1,23.37
+Control,1,ICS1,2,23.48
+Control,1,ICS1,3,23.48
+Control,1,RdR1,1,23.75
+Control,1,RdR1,2,23.58
+Control,1,RdR1,3,23.38
+Control,1,Thi2.1,1,32.56
+Control,1,Thi2.1,2,32.83
+Control,1,Thi2.1,3,33.29
+Control,4,OPR3,1,33.47
+Control,4,OPR3,2,34.05
+Control,4,OPR3,3,34.7
+Control,4,ICS1,1,23.55
+Control,4,ICS1,2,23.21
+Control,4,ICS1,3,23.42
+Control,4,RdR1,1,24.38
+Control,4,RdR1,2,23.89
+Control,4,RdR1,3,23.84
+Control,4,Thi2.1,1,34.76
+Control,4,Thi2.1,2,34.95
+Control,4,Thi2.1,3,36.22
+Control,7,OPR3,1,35.81
+Control,7,OPR3,2,36.51
+Control,7,OPR3,3,35.77
+Control,7,ICS1,1,23.24
+Control,7,ICS1,2,23.29
+Control,7,ICS1,3,23.26
+Control,7,RdR1,1,23.59
+Control,7,RdR1,2,23.59
+Control,7,RdR1,3,23.53
+Control,7,Thi2.1,1,29.3
+Control,7,Thi2.1,2,29.32
+Control,7,Thi2.1,3,29.28
