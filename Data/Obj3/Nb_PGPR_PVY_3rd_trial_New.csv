@@ -1,85 +1,85 @@
-Treatment,Rep,Dpi,Cq
-P. fluorescens,1,IL-1,20.12
-P. fluorescens,2,IL-1,20.22
-P. fluorescens,3,IL-1,20.24
-S. marcescens,1,IL-1,20.7
-S. marcescens,2,IL-1,21.06
-S. marcescens,3,IL-1,21.18
-B. subtilis,1,IL-1,21.44
-B. subtilis,2,IL-1,21.55
-B. subtilis,3,IL-1,21.58
-P. fluorescens,1,IL-4,22.21
-P. fluorescens,2,IL-4,22.18
-P. fluorescens,3,IL-4,22.38
-S. marcescens,1,IL-4,21.15
-S. marcescens,2,IL-4,21.2
-S. marcescens,3,IL-4,21.19
-B. subtilis,1,IL-4,22.15
-B. subtilis,2,IL-4,22.66
-B. subtilis,3,IL-4,22.24
-P. fluorescens,1,IL-7,24.04
-P. fluorescens,2,IL-7,24.07
-P. fluorescens,3,IL-7,24.2
-S. marcescens,1,IL-7,21.57
-S. marcescens,2,IL-7,21.69
-S. marcescens,3,IL-7,21.53
-B. subtilis,1,IL-7,22.15
-B. subtilis,2,IL-7,22.06
-B. subtilis,3,IL-7,22.25
-P. fluorescens,1,IL-10,21.97
-P. fluorescens,2,IL-10,22.2
-P. fluorescens,3,IL-10,22.05
-S. marcescens,1,IL-10,23.45
-S. marcescens,2,IL-10,23.32
-S. marcescens,3,IL-10,23.34
-B. subtilis,1,IL-10,21.46
-B. subtilis,2,IL-10,21.71
-B. subtilis,3,IL-10,21.74
-P. fluorescens,1,SL-7,31.51
-P. fluorescens,2,SL-7,32.12
-P. fluorescens,3,SL-7,31.81
-S. marcescens,1,SL-7,29.74
-S. marcescens,2,SL-7,30.04
-S. marcescens,3,SL-7,29.9
-B. subtilis,1,SL-7,30.83
-B. subtilis,2,SL-7,31.1
-B. subtilis,3,SL-7,30.94
-P. fluorescens,1,SL-10,30.04
-P. fluorescens,2,SL-10,30.22
-P. fluorescens,3,SL-10,30.16
-S. marcescens,1,SL-10,29.66
-S. marcescens,2,SL-10,29.9
-S. marcescens,3,SL-10,29.7
-B. subtilis,1,SL-10,22.14
-B. subtilis,2,SL-10,22.12
-B. subtilis,3,SL-10,22.13
-Control,1,IL-1,19.52
-Control,2,IL-1,19.59
-Control,3,IL-1,19.72
-Control,1,IL-4,20.62
-Control,2,IL-4,20.71
-Control,3,IL-4,20.71
-Control,1,IL-7,21.07
-Control,2,IL-7,21.2
-Control,3,IL-7,21.15
-Control,1,IL-10,20.22
-Control,2,IL-10,20.32
-Control,3,IL-10,20.51
-Control,1,SL-7,29.02
-Control,2,SL-7,29.1
-Control,3,SL-7,29.25
-Control,1,SL-10,29.13
-Control,2,SL-10,28.75
-Control,3,SL-10,29.12
-P. fluorescens,1,SL-14,29.31
-P. fluorescens,2,SL-14,29.84
-P. fluorescens,3,SL-14,29.88
-S. marcescens,1,SL-14,32.88
-S. marcescens,2,SL-14,33.23
-S. marcescens,3,SL-14,32.98
-B. subtilis,1,SL-14,29.07
-B. subtilis,2,SL-14,28.51
-B. subtilis,3,SL-14,28.77
-Control,1,SL-14,28.84
-Control,2,SL-14,28.67
-Control,3,SL-14,28.41
+Treatment,Dpi,Rep,Cq
+P. fluorescens,IL-1,1,23.05226963
+P. fluorescens,IL-1,2,23.07302454
+P. fluorescens,IL-1,3,22.9847284
+S. marcescens,IL-1,1,22.82329463
+S. marcescens,IL-1,2,22.7932699
+S. marcescens,IL-1,3,22.97308692
+B. subtilis,IL-1,1,22.34865901
+B. subtilis,IL-1,2,22.31188783
+B. subtilis,IL-1,3,22.36524497
+P. fluorescens,IL-4,1,23.31706525
+P. fluorescens,IL-4,2,23.0427194
+P. fluorescens,IL-4,3,23.07681923
+S. marcescens,IL-4,1,23.22381254
+S. marcescens,IL-4,2,23.1211658
+S. marcescens,IL-4,3,23.24557259
+B. subtilis,IL-4,1,20.90921589
+B. subtilis,IL-4,2,20.97491078
+B. subtilis,IL-4,3,20.67215698
+P. fluorescens,IL-7,1,25.51025517
+P. fluorescens,IL-7,2,25.42167484
+P. fluorescens,IL-7,3,25.25167865
+S. marcescens,IL-7,1,23.83942935
+S. marcescens,IL-7,2,22.32048396
+S. marcescens,IL-7,3,22.81408856
+B. subtilis,IL-7,1,20.0527491
+B. subtilis,IL-7,2,20.36657985
+B. subtilis,IL-7,3,20.34008224
+P. fluorescens,IL-10,1,26.42898505
+P. fluorescens,IL-10,2,25.7491375
+P. fluorescens,IL-10,3,25.47051379
+S. marcescens,IL-10,1,26.61
+S. marcescens,IL-10,2,26.04
+S. marcescens,IL-10,3,26.04
+B. subtilis,IL-10,1,19.02
+B. subtilis,IL-10,2,18.89
+B. subtilis,IL-10,3,19.01
+P. fluorescens,SL-7,1,30.77096596
+P. fluorescens,SL-7,2,31.00773023
+P. fluorescens,SL-7,3,31.53844737
+S. marcescens,SL-7,1,35.302278
+S. marcescens,SL-7,2,33.80351611
+S. marcescens,SL-7,3,33.35042524
+B. subtilis,SL-7,1,31.69293174
+B. subtilis,SL-7,2,32.1340678
+B. subtilis,SL-7,3,31.85524283
+P. fluorescens,SL-10,1,31.37698234
+P. fluorescens,SL-10,2,31.78269832
+P. fluorescens,SL-10,3,31.2421393
+S. marcescens,SL-10,1,30.87718787
+S. marcescens,SL-10,2,30.83757812
+S. marcescens,SL-10,3,31.10813858
+B. subtilis,SL-10,1,32.25799939
+B. subtilis,SL-10,2,32.06849142
+B. subtilis,SL-10,3,31.60578563
+Control,IL-1,1,21.72554272
+Control,IL-1,2,22.13594845
+Control,IL-1,3,21.92137066
+Control,IL-4,1,21.57387178
+Control,IL-4,2,21.76588193
+Control,IL-4,3,21.75794534
+Control,IL-7,1,21.92907156
+Control,IL-7,2,22.25675764
+Control,IL-7,3,21.86250934
+Control,IL-10,1,21.64739968
+Control,IL-10,2,21.62175478
+Control,IL-10,3,21.73372938
+Control,SL-7,1,29.71245459
+Control,SL-7,2,30.20786338
+Control,SL-7,3,30.11885805
+Control,SL-10,1,29.55110648
+Control,SL-10,2,28.66237007
+Control,SL-10,3,28.64023844
+P. fluorescens,SL-14,1,31.02361484
+P. fluorescens,SL-14,2,32.04612453
+P. fluorescens,SL-14,3,31.94279623
+S. marcescens,SL-14,1,31.03322205
+S. marcescens,SL-14,2,31.09411837
+S. marcescens,SL-14,3,31.31107086
+B. subtilis,SL-14,1,31.74337066
+B. subtilis,SL-14,2,32.68731412
+B. subtilis,SL-14,3,31.45097478
+Control,SL-14,1,30.106834
+Control,SL-14,2,30.16399673
+Control,SL-14,3,30.06705678
