@@ -35,7 +35,7 @@ library(multcompView)
 
 ## Load the data
 ```{r}
-rep1 <- read.csv("Data-obj1-New/At_PVY_1st_trial_New.csv", header=T)
+rep1 <- read.csv("Data/Obj1/At_PVY_1st_PVY3_10ng.csv", header=T)
 head(rep1)  # View the first few rows
 str(rep1)   # Check the structure of the data
 summary(rep1) # Quick statistical summary
@@ -108,7 +108,7 @@ PVY_1
 # **Second trial**
 ## Load the data
 ```{r}
-rep2 <- read.csv("Data-obj1-New/At_PVY_2nd_trial_New.csv", header=T)
+rep2 <- read.csv("Data/Obj1//At_PVY_2nd_PVY3_10ng.csv", header=T)
 head(rep2)  # View the first few rows
 str(rep2)   # Check the structure of the data
 summary(rep2) # Quick statistical summary
@@ -208,7 +208,7 @@ combined_plot_PVY3_annotated
 
 ## Load the data
 ```{r}
-rep1 <- read.csv("Data-obj1-New/At_1st_PVY1_10ng.csv", header=T)
+rep1 <- read.csv("Data/Obj1/At_PVY_1st_PVY1_10ng.csv", header=T)
 head(rep1)  # View the first few rows
 str(rep1)   # Check the structure of the data
 summary(rep1) # Quick statistical summary
@@ -283,7 +283,7 @@ PVY_1_PVY1_10ng
 # **Supplementary Second trial**
 ## Load the data
 ```{r}
-rep2 <- read.csv("Data-obj1-New/At_2nd_PVY1_10ng.csv", header=T)
+rep2 <- read.csv("Data/Obj1//At_PVY_2nd_PVY1_10ng.csv", header=T)
 head(rep2)  # View the first few rows
 str(rep2)   # Check the structure of the data
 summary(rep2) # Quick statistical summary

@@ -37,7 +37,7 @@ library(tibble)
 
 ## Load the data
 ```{r}
-rep <- read.csv("Data-obj3-New/At_PGPR_CMV_New.csv", header=T)
+rep <- read.csv("Data/Obj3/At_PGPR_CMV_Combine.csv", header=T)
 head(rep)  # View the first few rows
 str(rep)   # Check the structure of the data
 summary(rep) # Quick statistical summary
