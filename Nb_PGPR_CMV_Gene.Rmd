@@ -27,7 +27,7 @@ library(gridExtra)
 ## Load the data
 
 ```{r}
-rep<-read.csv("Data-obj2-New/Nb_PGPR_CMV_Gene_New.csv", na.strings="na")
+rep<-read.csv("Data/Obj2/Nb_PGPR_CMV_Gene_Combine.csv", na.strings="na")
 head(rep)
 str(rep)
 summary(rep)
