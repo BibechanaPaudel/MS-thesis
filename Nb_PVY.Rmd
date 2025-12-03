@@ -35,7 +35,7 @@ library(multcompView)
 
 ## Load the data
 ```{r}
-rep1 <- read.csv("Data-obj1-New/Nb_PVY_1st_trial_New.csv", header=T)
+rep1 <- read.csv("Data/Obj1/Nb_PVY_1st_PVY3_10ng.csv", header=T)
 head(rep1)  # View the first few rows
 str(rep1)   # Check the structure of the data
 summary(rep1) # Quick statistical summary
@@ -108,7 +108,7 @@ PVY_1
 # **Second trial**
 ## Load the data
 ```{r}
-rep2 <- read.csv("Data-obj1-New/Nb_PVY_2nd_trial_New.csv", header=T)
+rep2 <- read.csv("Data/Obj1/Nb_PVY_2nd_PVY3_10ng.csv", header=T)
 head(rep2)  # View the first few rows
 str(rep2)   # Check the structure of the data
 summary(rep2) # Quick statistical summary
@@ -182,7 +182,7 @@ PVY_2
 # **Supplementary First Trial**
 ## Load the data
 ```{r}
-rep1_PVY3_1ng <- read.csv("Data-obj1-New/Nb_PVY_1st_PVY3_1ng.csv", header=T)
+rep1_PVY3_1ng <- read.csv("Data/Obj1/Nb_PVY_1st_PVY3_1ng.csv", header=T)
 head(rep1_PVY3_1ng)  # View the first few rows
 str(rep1_PVY3_1ng)   # Check the structure of the data
 summary(rep1_PVY3_1ng) # Quick statistical summary
@@ -286,7 +286,7 @@ combined_plot_PVY3_annotated
 
 ## Load the data
 ```{r}
-rep1_PVY1_10ng <- read.csv("Data-obj1-New/Nb_PVY_1st_PVY1_10ng.csv", header=T)
+rep1_PVY1_10ng <- read.csv("Data/Obj1/Nb_PVY_1st_PVY1_10ng.csv", header=T)
 head(rep1_PVY1_10ng)  # View the first few rows
 str(rep1_PVY1_10ng)   # Check the structure of the data
 summary(rep1_PVY1_10ng) # Quick statistical summary
@@ -359,7 +359,7 @@ PVY_1_PVY1_10ng
 
 ## Load the data
 ```{r}
-rep1_PVY1_1ng <- read.csv("Data-obj1-New/Nb_PVY_1st_PVY1_1ng.csv", header=T)
+rep1_PVY1_1ng <- read.csv("Data/Obj1/Nb_PVY_1st_PVY1_1ng.csv", header=T)
 head(rep1_PVY1_1ng)  # View the first few rows
 str(rep1_PVY1_1ng)   # Check the structure of the data
 summary(rep1_PVY1_1ng) # Quick statistical summary
@@ -431,7 +431,7 @@ PVY_1_PVY1_1ng
 # **Supplementary Second trial**
 ## Load the data
 ```{r}
-rep2_PVY1_10ng <-read.csv("Data-obj1-New/Nb_PVY_2nd_PVY1_10ng.csv", header=T)
+rep2_PVY1_10ng <-read.csv("Data/Obj1/Nb_PVY_2nd_PVY1_10ng.csv", header=T)
 head(rep2_PVY1_10ng)  # View the first few rows
 str(rep2_PVY1_10ng)   # Check the structure of the data
 summary(rep2_PVY1_10ng) # Quick statistical summary
