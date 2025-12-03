@@ -27,7 +27,7 @@ library(gridExtra)
 ## Load the data
 
 ```{r}
-rep<-read.csv("Data-obj2-New/At_PGPR_CMV_Gene_Combine.csv", na.strings="na")
+rep<-read.csv("Data/Obj2/At_PGPR_CMV_Gene_Combine.csv", na.strings="na")
 head(rep) # Display the first few rows of the dataset.
 str(rep) # Show the structure of the dataset.
 summary(rep) # Summary statistics for each column.
